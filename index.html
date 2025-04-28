@@ -150,6 +150,7 @@
         }
         
         .hero {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -157,6 +158,25 @@
             padding: 8rem 0 4rem;
             text-align: center;
             background: linear-gradient(135deg, #fff 0%, var(--gray-white) 100%);
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, var(--mayr-blue-light) 0%, transparent 25%),
+                       radial-gradient(circle at 70% 30%, var(--mayr-green-light) 0%, transparent 25%);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
@@ -177,12 +197,15 @@
             color: white;
             border-radius: 4px;
             font-weight: 500;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
         }
         
         .cta-button:hover {
             background-color: var(--mayr-blue-dark);
             color: white;
+            transform: translateY(-2px);
         }
         
         .flex-container {
@@ -217,7 +240,7 @@
         /* FGL Animation */
         .fgl-animation {
             width: 100%;
-            height: 300px;
+            height: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -233,6 +256,7 @@
             height: 20px;
             background: var(--mayr-blue);
             position: relative;
+            transform: scaleX(1);
             transition: transform 2s ease;
         }
         
@@ -251,6 +275,7 @@
             background: linear-gradient(90deg, blue, red);
             border-radius: 5px;
             margin: 0 10px;
+            position: relative;
         }
         
         .temperature-slider {
@@ -263,7 +288,6 @@
             left: 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             cursor: pointer;
-            transition: left 0.3s ease;
         }
         
         /* Konfigurator */
@@ -428,6 +452,13 @@
             resize: vertical;
         }
         
+        /* Glossary */
+        .glossary-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
         /* Footer */
         footer {
             background-color: var(--gray-dark);
@@ -478,6 +509,65 @@
             color: var(--gray-lightest);
         }
         
+        /* Whitepaper Download */
+        .download-card {
+            background: linear-gradient(135deg, var(--mayr-blue-light) 0%, var(--mayr-blue) 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0 0 0 150px;
+        }
+        
+        .download-card h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+        
+        .download-card p {
+            margin-bottom: 2rem;
+            max-width: 70%;
+        }
+        
+        .download-button {
+            background-color: white;
+            color: var(--mayr-blue);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 500;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .download-button:hover {
+            background-color: var(--gray-white);
+            color: var(--mayr-blue-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
         /* Responsive design */
         @media (max-width: 992px) {
             .flex-container {
@@ -513,11 +603,27 @@
                 cursor: pointer;
                 color: var(--gray-dark);
             }
+            
+            .glossary-items {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
             .options {
                 flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .download-card p {
+                max-width: 100%;
             }
         }
     </style>
@@ -539,6 +645,7 @@
                     <li><a href="#fgl">Formgedächtnislegierung</a></li>
                     <li><a href="#konfigurator">Konfigurator</a></li>
                     <li><a href="#anwendungen">Anwendungen</a></li>
+                    <li><a href="#fachwissen">Fachwissen</a></li>
                     <li><a href="#kontakt">Kontakt</a></li>
                 </ul>
             </nav>
@@ -549,7 +656,7 @@
     <main>
         <!-- Hero-Bereich -->
         <section id="home" class="hero">
-            <div class="container">
+            <div class="container hero-content">
                 <h1>mayr Powerbündel</h1>
                 <p>Innovative Antriebstechnik mit Formgedächtnislegierung für präzise Kraft und hohe Zuverlässigkeit</p>
                 <a href="#konfigurator" class="cta-button">Jetzt konfigurieren</a>
@@ -755,47 +862,518 @@
         <section id="anwendungen" class="bg-light">
             <div class="container">
                 <h2>Anwendungsmöglichkeiten</h2>
-                <p>Das Powerbündel bietet vielfältige Einsatzmöglichkeiten in verschiedenen Bereichen. Hier einige Beispiele:</p>
-                
-                <div class="flex-container">
-                    <div class="flex-item card">
-                        <h3>Spannsystem</h3>
-                        <p>Die präzise Kraftentwicklung des Powerbündels macht es ideal für Spannsysteme, bei denen zuverlässiges Halten und gleichmäßige Kraftverteilung entscheidend sind.</p>
-                        <img src="/api/placeholder/400/200" alt="Spannsystem mit Powerbündel" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
-                    </div>
-                    <div class="flex-item card">
-                        <h3>Greifer</h3>
-                        <p>In der Automatisierungstechnik und Robotik ermöglicht das Powerbündel präzises Greifen mit kontrollierbarer Kraft, ideal für empfindliche Komponenten und variable Werkstücke.</p>
-                        <img src="/api/placeholder/400/200" alt="Greifer mit Powerbündel" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
-                    </div>
-                </div>
-            </div>
-        </section>
+                <p>Das Powerbündel bietet vi</p>
+                 </div>
+        </section> 
 
-        <!-- FAQ-Bereich -->
-        <section id="faq">
-            <div class="container">
-                <h2>Häufig gestellte Fragen</h2>
-                
-                <div class="card" style="margin-bottom: 1rem;">
-                    <h3>Was ist der Unterschied zwischen Einweg- und Zweiweg-Effekt?</h3>
-                    <p>Beim Einweg-Effekt kehrt das Material bei Erwärmung in seine Ursprungsform zurück, behält diese aber bei Abkühlung bei. Beim Zweiweg-Effekt wechselt es zwischen zwei Formen abhängig von der Temperatur.</p>
-                </div>
-                
-                <div class="card" style="margin-bottom: 1rem;">
-                    <h3>Wie wird das Powerbündel angesteuert?</h3>
-                    <p>Das Powerbündel wird elektrisch angesteuert, indem kontrolliert Strom durch die Formgedächtnislegierung fließt und diese erwärmt. Die Steuerung kann über Standard-Industriekomponenten erfolgen.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Welche Lebensdauer hat ein Powerbündel?</h3>
-                    <p>Die Lebensdauer hängt stark von der Anwendung ab, typischerweise können jedoch mehrere Millionen Zyklen erreicht werden. Gerne beraten wir Sie zu Ihrer spezifischen Anwendung.</p>
-                </div>
-            </div>
-        </section>
+                    // Mobile Navigation Toggle
+const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+const mainNav = document.getElementById('main-nav');
 
-        <!-- Kontakt-Bereich -->
-        <section id="kontakt" class="bg-light">
-            <div class="container">
-                <h2>Kontakt</h2>
-                <p>Haben Sie Fragen zum Powerbündel oder benötigen Sie eine individuelle Beratung? Kontaktieren Sie uns g
+mobileNavToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+});
+
+// Smooth Scroll für Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            window.scrollTo({
+                top: target.offsetTop - 80, // Header-Höhe berücksichtigen
+                behavior: 'smooth'
+            });
+            
+            // Mobile Navigation schließen, wenn ein Link geklickt wird
+            mainNav.classList.remove('active');
+        }
+    });
+});
+
+// FGL-Animation
+const fglElement = document.getElementById('fgl-element');
+const temperatureSlider = document.getElementById('temp-slider');
+let isDragging = false;
+
+// Anfangszustand setzen
+fglElement.style.transform = 'scaleX(1)';
+
+// Temperatur-Slider Funktionalität
+temperatureSlider.addEventListener('mousedown', () => {
+    isDragging = true;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        const temperatureBar = document.querySelector('.temperature-bar');
+        const barRect = temperatureBar.getBoundingClientRect();
+        
+        // Position des Sliders berechnen (0-100%)
+        let position = (e.clientX - barRect.left) / barRect.width;
+        position = Math.max(0, Math.min(position, 1)); // Auf 0-1 begrenzen
+        
+        // Slider positionieren
+        temperatureSlider.style.left = `${position * 100}%`;
+        
+        // FGL-Element transformieren basierend auf der Temperatur
+        // Bei höherer Temperatur (rechts) zieht sich das Element zusammen
+        const scaleValue = 1 - (position * 0.3); // Scale von 1.0 bis 0.7
+        fglElement.style.transform = `scaleX(${scaleValue})`;
+    }
+});
+
+// Touch-Unterstützung für den Slider
+temperatureSlider.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    e.preventDefault();
+});
+
+document.addEventListener('touchend', () => {
+    isDragging = false;
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (isDragging && e.touches.length > 0) {
+        const temperatureBar = document.querySelector('.temperature-bar');
+        const barRect = temperatureBar.getBoundingClientRect();
+        
+        // Position des Sliders berechnen (0-100%)
+        let position = (e.touches[0].clientX - barRect.left) / barRect.width;
+        position = Math.max(0, Math.min(position, 1)); // Auf 0-1 begrenzen
+        
+        // Slider positionieren
+        temperatureSlider.style.left = `${position * 100}%`;
+        
+        // FGL-Element transformieren basierend auf der Temperatur
+        const scaleValue = 1 - (position * 0.3); // Scale von 1.0 bis 0.7
+        fglElement.style.transform = `scaleX(${scaleValue})`;
+    }
+});
+
+// Konfigurator Funktionen
+const configuratorSteps = document.querySelectorAll('.step');
+const configuratorContents = document.querySelectorAll('.configurator-content');
+const prevButton = document.querySelector('.config-button.prev');
+const nextButton = document.querySelector('.config-button.next');
+
+let currentStep = 0;
+
+// Konfigurator-Optionen
+const options = document.querySelectorAll('.option');
+options.forEach(option => {
+    option.addEventListener('click', function() {
+        // Ausgewählte Option in der aktuellen Gruppe markieren
+        const siblings = this.parentElement.querySelectorAll('.option');
+        siblings.forEach(sib => sib.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+
+// Nächster Schritt im Konfigurator
+nextButton.addEventListener('click', () => {
+    if (currentStep < configuratorSteps.length - 1) {
+        // Aktuellen Schritt deaktivieren
+        configuratorSteps[currentStep].classList.remove('active');
+        configuratorContents[currentStep].classList.remove('active');
+        
+        // Nächsten Schritt aktivieren
+        currentStep++;
+        configuratorSteps[currentStep].classList.add('active');
+        
+        // Wenn wir mehr als den ersten Schritt haben, zeigen wir den Inhalt an
+        if (currentStep < configuratorContents.length) {
+            configuratorContents[currentStep].classList.add('active');
+        } else {
+            // Wenn wir am letzten Schritt sind, zeigen wir die Übersicht an
+            createSummary();
+        }
+        
+        // Button-Status aktualisieren
+        prevButton.disabled = false;
+        if (currentStep === configuratorSteps.length - 1) {
+            nextButton.textContent = 'Anfrage senden';
+        }
+    } else {
+        // Letzter Schritt: Anfrage senden
+        alert('Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.');
+        resetConfigurator();
+    }
+});
+
+// Vorheriger Schritt im Konfigurator
+prevButton.addEventListener('click', () => {
+    if (currentStep > 0) {
+        // Aktuellen Schritt deaktivieren
+        configuratorSteps[currentStep].classList.remove('active');
+        if (currentStep < configuratorContents.length) {
+            configuratorContents[currentStep].classList.remove('active');
+        }
+        
+        // Vorherigen Schritt aktivieren
+        currentStep--;
+        configuratorSteps[currentStep].classList.add('active');
+        configuratorContents[currentStep].classList.add('active');
+        
+        // Button-Status aktualisieren
+        nextButton.textContent = 'Weiter';
+        if (currentStep === 0) {
+            prevButton.disabled = true;
+        }
+    }
+});
+
+// Konfigurator zurücksetzen
+function resetConfigurator() {
+    // Alle Schritte deaktivieren außer dem ersten
+    configuratorSteps.forEach((step, index) => {
+        if (index === 0) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+    
+    // Alle Inhalte deaktivieren außer dem ersten
+    configuratorContents.forEach((content, index) => {
+        if (index === 0) {
+            content.classList.add('active');
+        } else {
+            content.classList.remove('active');
+        }
+    });
+    
+    // Button-Status zurücksetzen
+    currentStep = 0;
+    prevButton.disabled = true;
+    nextButton.textContent = 'Weiter';
+    
+    // Ausgewählte Optionen zurücksetzen (Standard-Auswahl beibehalten)
+    document.querySelectorAll('.options').forEach(optionGroup => {
+        const options = optionGroup.querySelectorAll('.option');
+        // Bei jeder Optionsgruppe nur eine Option ausgewählt lassen
+        let hasSelected = false;
+        options.forEach(option => {
+            if (option.classList.contains('selected') && !hasSelected) {
+                hasSelected = true;
+            } else {
+                option.classList.remove('selected');
+            }
+        });
+        
+        // Falls keine Option ausgewählt ist, die erste auswählen
+        if (!hasSelected && options.length > 0) {
+            options[0].classList.add('selected');
+        }
+    });
+}
+
+// Zusammenfassung erstellen für den letzten Schritt
+function createSummary() {
+    // Neues Inhalts-Element für die Zusammenfassung erstellen
+    const summaryElement = document.createElement('div');
+    summaryElement.classList.add('configurator-content', 'active');
+    summaryElement.id = 'summary';
+    
+    // Überschrift hinzufügen
+    const heading = document.createElement('h3');
+    heading.textContent = 'Ihre Konfiguration';
+    summaryElement.appendChild(heading);
+    
+    // Gewählte Optionen sammeln
+    const selectedOptions = [];
+    document.querySelectorAll('.option.selected').forEach(option => {
+        const stepTitle = option.closest('.configurator-content').previousElementSibling.querySelector('.step-title').textContent;
+        selectedOptions.push({
+            step: stepTitle,
+            value: option.textContent
+        });
+    });
+    
+    // Zusammenfassung als Liste erstellen
+    const summaryList = document.createElement('ul');
+    summaryList.style.listStyleType = 'none';
+    summaryList.style.padding = '1rem';
+    summaryList.style.backgroundColor = 'var(--gray-white)';
+    summaryList.style.borderRadius = '4px';
+    summaryList.style.marginBottom = '2rem';
+    
+    selectedOptions.forEach(option => {
+        const listItem = document.createElement('li');
+        listItem.style.marginBottom = '0.5rem';
+        listItem.style.padding = '0.5rem';
+        listItem.style.borderBottom = '1px solid var(--gray-lightest)';
+        
+        const stepSpan = document.createElement('span');
+        stepSpan.textContent = option.step + ': ';
+        stepSpan.style.fontWeight = 'bold';
+        
+        const valueSpan = document.createElement('span');
+        valueSpan.textContent = option.value;
+        
+        listItem.appendChild(stepSpan);
+        listItem.appendChild(valueSpan);
+        summaryList.appendChild(listItem);
+    });
+    
+    summaryElement.appendChild(summaryList);
+    
+    // Kontaktformular für die Anfrage hinzufügen
+    const contactForm = document.createElement('div');
+    
+    const nameField = createFormField('Ihr Name', 'text', 'summary-name');
+    const emailField = createFormField('Ihre E-Mail-Adresse', 'email', 'summary-email');
+    const phoneField = createFormField('Ihre Telefonnummer (optional)', 'tel', 'summary-phone');
+    const messageField = createFormField('Ihre Nachricht (optional)', 'textarea', 'summary-message');
+    
+    contactForm.appendChild(nameField);
+    contactForm.appendChild(emailField);
+    contactForm.appendChild(phoneField);
+    contactForm.appendChild(messageField);
+    
+    summaryElement.appendChild(contactForm);
+    
+    // Hinweis für Datenschutz
+    const privacyNote = document.createElement('p');
+    privacyNote.style.fontSize = '14px';
+    privacyNote.style.marginTop = '1rem';
+    privacyNote.style.color = 'var(--gray-lighter)';
+    privacyNote.textContent = 'Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.';
+    
+    summaryElement.appendChild(privacyNote);
+    
+    // Alte Zusammenfassung entfernen, falls vorhanden
+    const oldSummary = document.getElementById('summary');
+    if (oldSummary) {
+        oldSummary.remove();
+    }
+    
+    // Zusammenfassung an den Konfigurator anhängen
+    document.querySelector('.configurator-navigation').before(summaryElement);
+}
+
+// Hilfsfunktion zum Erstellen von Formularfeldern
+function createFormField(label, type, id) {
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('form-group');
+    
+    const labelElement = document.createElement('label');
+    labelElement.setAttribute('for', id);
+    labelElement.textContent = label;
+    
+    let inputElement;
+    if (type === 'textarea') {
+        inputElement = document.createElement('textarea');
+        inputElement.rows = 4;
+    } else {
+        inputElement = document.createElement('input');
+        inputElement.type = type;
+    }
+    
+    inputElement.classList.add('form-control');
+    inputElement.id = id;
+    
+    formGroup.appendChild(labelElement);
+    formGroup.appendChild(inputElement);
+    
+    return formGroup;
+}
+
+// Formular-Validierung für die individuellen Konfigurationen
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    
+    if (!name || !email) {
+        alert('Bitte füllen Sie alle Pflichtfelder aus.');
+        return;
+    }
+    
+    alert('Vielen Dank für Ihre individuelle Anfrage! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.');
+    this.reset();
+});
+
+// Fade-in Animation für Elemente beim Scrollen
+const fadeElements = document.querySelectorAll('.card, .flex-container, .configurator');
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+fadeElements.forEach(element => {
+    observer.observe(element);
+});
+
+// Funktionen für zusätzliche Konfigurator-Schritte erstellen
+// Diese würden für die Grundlänge, Elektrischer Anschluss und Mechanische Einbauvariante implementiert werden
+// Da sie im bereitgestellten HTML-Code nicht vollständig enthalten sind, erstellen wir Platzhalter-Funktionen
+
+// Erstelle Schritt 2: Grundlänge
+function createStep2() {
+    const step2 = document.createElement('div');
+    step2.classList.add('configurator-content');
+    step2.id = 'step-2';
+    
+    const optionGroup = document.createElement('div');
+    optionGroup.classList.add('option-group');
+    
+    const heading = document.createElement('h3');
+    heading.textContent = 'Wählen Sie die gewünschte Grundlänge';
+    
+    const options = document.createElement('div');
+    options.classList.add('options');
+    
+    const lengths = ['50 mm', '75 mm', '100 mm', '125 mm', '150 mm', '200 mm'];
+    
+    lengths.forEach(length => {
+        const option = document.createElement('div');
+        option.classList.add('option');
+        if (length === '100 mm') {
+            option.classList.add('selected');
+        }
+        option.textContent = length;
+        option.addEventListener('click', function() {
+            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+        options.appendChild(option);
+    });
+    
+    optionGroup.appendChild(heading);
+    optionGroup.appendChild(options);
+    step2.appendChild(optionGroup);
+    
+    return step2;
+}
+
+// Erstelle Schritt 3: Elektrischer Anschluss
+function createStep3() {
+    const step3 = document.createElement('div');
+    step3.classList.add('configurator-content');
+    step3.id = 'step-3';
+    
+    const optionGroup = document.createElement('div');
+    optionGroup.classList.add('option-group');
+    
+    const heading = document.createElement('h3');
+    heading.textContent = 'Wählen Sie den elektrischen Anschluss';
+    
+    const options = document.createElement('div');
+    options.classList.add('options');
+    
+    const connections = ['Standard-Steckverbinder', 'Kabelanschluss', 'Spezialadapter'];
+    
+    connections.forEach(connection => {
+        const option = document.createElement('div');
+        option.classList.add('option');
+        if (connection === 'Standard-Steckverbinder') {
+            option.classList.add('selected');
+        }
+        option.textContent = connection;
+        option.addEventListener('click', function() {
+            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+        options.appendChild(option);
+    });
+    
+    optionGroup.appendChild(heading);
+    optionGroup.appendChild(options);
+    step3.appendChild(optionGroup);
+    
+    return step3;
+}
+
+// Erstelle Schritt 4: Mechanische Einbauvariante
+function createStep4() {
+    const step4 = document.createElement('div');
+    step4.classList.add('configurator-content');
+    step4.id = 'step-4';
+    
+    const optionGroup = document.createElement('div');
+    optionGroup.classList.add('option-group');
+    
+    const heading = document.createElement('h3');
+    heading.textContent = 'Wählen Sie die mechanische Einbauvariante';
+    
+    const options = document.createElement('div');
+    options.classList.add('options');
+    
+    const variants = ['Standardflansch', 'Spezialhalterung', 'Universal-Befestigung', 'Kundenspezifische Lösung'];
+    
+    variants.forEach(variant => {
+        const option = document.createElement('div');
+        option.classList.add('option');
+        if (variant === 'Standardflansch') {
+            option.classList.add('selected');
+        }
+        option.textContent = variant;
+        option.addEventListener('click', function() {
+            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+        options.appendChild(option);
+    });
+    
+    optionGroup.appendChild(heading);
+    optionGroup.appendChild(options);
+    step4.appendChild(optionGroup);
+    
+    return step4;
+}
+
+// Zusätzliche Schritte zur Konfiguration hinzufügen
+function addConfiguratorSteps() {
+    const step2 = createStep2();
+    const step3 = createStep3();
+    const step4 = createStep4();
+    
+    const configurator = document.querySelector('.configurator');
+    const configNav = document.querySelector('.configurator-navigation');
+    
+    configurator.insertBefore(step2, configNav);
+    configurator.insertBefore(step3, configNav);
+    configurator.insertBefore(step4, configNav);
+}
+
+// Initialisierung
+document.addEventListener('DOMContentLoaded', function() {
+    // Zusätzliche Schritte zum Konfigurator hinzufügen
+    addConfiguratorSteps();
+    
+    // Animations-Funktionalität initialisieren
+    const fglElement = document.getElementById('fgl-element');
+    if (fglElement) {
+        setInterval(() => {
+            // Automatische Animation, wenn der Benutzer nicht interagiert
+            if (!isDragging) {
+                const currentScale = parseFloat(fglElement.style.transform.replace('scaleX(', '').replace(')', '')) || 1;
+                const date = new Date();
+                const seconds = date.getSeconds() + date.getMilliseconds() / 1000;
+                // Sanfte Atmungsanimation
+                const newScale = 0.85 + Math.sin(seconds * 0.5) * 0.15;
+                fglElement.style.transform = `scaleX(${newScale})`;
+                
+                // Slider entsprechend positionieren
+                const sliderPos = (1 - newScale) / 0.3;
+                temperatureSlider.style.left = `${sliderPos * 100}%`;
+            }
+        }, 50);
+    }
+});
