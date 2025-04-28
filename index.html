@@ -4,629 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mayr Powerbündel - Innovative Antriebstechnik mit Formgedächtnislegierung</title>
-    <style>
-        :root {
-            --mayr-blue: #0093d7;
-            --mayr-blue-dark: #0074aa;
-            --mayr-blue-light: #4db8e5;
-            --mayr-green: #a1bf36;
-            --mayr-green-dark: #81982b;
-            --mayr-green-light: #b8d166;
-            --gray-dark: #1d1d1d;
-            --gray-medium: #404040;
-            --gray-light: #4a4c4d;
-            --gray-lighter: #888b8c;
-            --gray-lightest: #d2d7d9;
-            --gray-white: #ebf0f2;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #fff;
-            color: var(--gray-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        h1 {
-            font-size: 32px;
-            color: var(--mayr-blue);
-        }
-        
-        h2 {
-            font-size: 28px;
-            color: var(--mayr-blue-dark);
-        }
-        
-        h3 {
-            font-size: 24px;
-            color: var(--gray-dark);
-        }
-        
-        p, li {
-            font-size: 16px;
-            margin-bottom: 1rem;
-        }
-        
-        a {
-            color: var(--mayr-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        a:hover {
-            color: var(--mayr-blue-dark);
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header styles */
-        header {
-            background-color: #fff;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            height: 50px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 2rem;
-            margin-bottom: 0;
-        }
-        
-        nav ul li a {
-            color: var(--gray-dark);
-            font-weight: 500;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--mayr-blue);
-            transition: width 0.3s ease;
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        .mobile-nav-toggle {
-            display: none;
-        }
-        
-        /* Main content styles */
-        main {
-            margin-top: 80px;
-            min-height: calc(100vh - 240px);
-        }
-        
-        section {
-            padding: 4rem 0;
-            scroll-margin-top: 80px;
-        }
-        
-        .bg-light {
-            background-color: var(--gray-white);
-        }
-        
-        .hero {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 8rem 0 4rem;
-            text-align: center;
-            background: linear-gradient(135deg, #fff 0%, var(--gray-white) 100%);
-            overflow: hidden;
-        }
-        
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 70%, var(--mayr-blue-light) 0%, transparent 25%),
-                       radial-gradient(circle at 70% 30%, var(--mayr-green-light) 0%, transparent 25%);
-            opacity: 0.3;
-            z-index: 0;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            margin-bottom: 1.5rem;
-            font-size: 42px;
-        }
-        
-        .hero p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 18px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--mayr-blue);
-            color: white;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .cta-button:hover {
-            background-color: var(--mayr-blue-dark);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .flex-container {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .flex-item {
-            flex: 1;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--mayr-blue);
-            margin-bottom: 1rem;
-        }
-        
-        /* FGL Animation */
-        .fgl-animation {
-            width: 100%;
-            height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--gray-white);
-            border-radius: 8px;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .animation-element {
-            width: 200px;
-            height: 20px;
-            background: var(--mayr-blue);
-            position: relative;
-            transform: scaleX(1);
-            transition: transform 2s ease;
-        }
-        
-        .temperature-indicator {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-        }
-        
-        .temperature-bar {
-            width: 200px;
-            height: 10px;
-            background: linear-gradient(90deg, blue, red);
-            border-radius: 5px;
-            margin: 0 10px;
-            position: relative;
-        }
-        
-        .temperature-slider {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: -5px;
-            left: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            cursor: pointer;
-        }
-        
-        /* Konfigurator */
-        .configurator {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .configurator-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-        
-        .step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-        
-        .step:not(:last-child):after {
-            content: '';
-            position: absolute;
-            height: 2px;
-            background: var(--gray-lightest);
-            width: 100%;
-            left: 50%;
-            top: 15px;
-            z-index: 1;
-        }
-        
-        .step-number {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 30px;
-            height: 30px;
-            background: var(--gray-lightest);
-            color: white;
-            border-radius: 50%;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .step.active .step-number {
-            background: var(--mayr-blue);
-        }
-        
-        .step-title {
-            font-size: 14px;
-            color: var(--gray-light);
-        }
-        
-        .step.active .step-title {
-            color: var(--mayr-blue);
-            font-weight: 500;
-        }
-        
-        .configurator-content {
-            display: none;
-        }
-        
-        .configurator-content.active {
-            display: block;
-        }
-        
-        .option-group {
-            margin-bottom: 2rem;
-        }
-        
-        .option-group h3 {
-            margin-bottom: 1rem;
-            font-size: 18px;
-        }
-        
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .option {
-            padding: 0.8rem 1.5rem;
-            background: var(--gray-white);
-            border: 1px solid var(--gray-lightest);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .option:hover {
-            background: var(--gray-lightest);
-        }
-        
-        .option.selected {
-            background: var(--mayr-blue-light);
-            color: white;
-            border-color: var(--mayr-blue);
-        }
-        
-        .configurator-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        
-        .config-button {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        
-        .config-button.prev {
-            background: var(--gray-white);
-            color: var(--gray-dark);
-        }
-        
-        .config-button.next {
-            background: var(--mayr-blue);
-            color: white;
-        }
-        
-        .config-button:hover {
-            filter: brightness(90%);
-        }
-        
-        /* Form fields */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--gray-lightest);
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--mayr-blue);
-        }
-        
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        /* Glossary */
-        .glossary-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--gray-dark);
-            color: white;
-            padding: 3rem 0;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 200px;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 18px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-links a {
-            color: var(--gray-lightest);
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid var(--gray-light);
-            padding-top: 1.5rem;
-            margin-top: 1rem;
-            text-align: center;
-            font-size: 14px;
-            color: var(--gray-lightest);
-        }
-        
-        /* Whitepaper Download */
-        .download-card {
-            background: linear-gradient(135deg, var(--mayr-blue-light) 0%, var(--mayr-blue) 100%);
-            color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 0 0 0 150px;
-        }
-        
-        .download-card h3 {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 1rem;
-        }
-        
-        .download-card p {
-            margin-bottom: 2rem;
-            max-width: 70%;
-        }
-        
-        .download-button {
-            background-color: white;
-            color: var(--mayr-blue);
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            font-weight: 500;
-            display: inline-block;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        
-        .download-button:hover {
-            background-color: var(--gray-white);
-            color: var(--mayr-blue-dark);
-            transform: translateY(-2px);
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-            .flex-container {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: white;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                padding: 1rem 0;
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.5rem 2rem;
-            }
-            
-            .mobile-nav-toggle {
-                display: block;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--gray-dark);
-            }
-            
-            .glossary-items {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .options {
-                flex-direction: column;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .download-card p {
-                max-width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header mit Navigation -->
@@ -862,518 +240,157 @@
         <section id="anwendungen" class="bg-light">
             <div class="container">
                 <h2>Anwendungsmöglichkeiten</h2>
-                <p>Das Powerbündel bietet vi</p>
-                 </div>
-        </section> 
-
-                    // Mobile Navigation Toggle
-const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-const mainNav = document.getElementById('main-nav');
-
-mobileNavToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-});
-
-// Smooth Scroll für Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80, // Header-Höhe berücksichtigen
-                behavior: 'smooth'
-            });
-            
-            // Mobile Navigation schließen, wenn ein Link geklickt wird
-            mainNav.classList.remove('active');
-        }
-    });
-});
-
-// FGL-Animation
-const fglElement = document.getElementById('fgl-element');
-const temperatureSlider = document.getElementById('temp-slider');
-let isDragging = false;
-
-// Anfangszustand setzen
-fglElement.style.transform = 'scaleX(1)';
-
-// Temperatur-Slider Funktionalität
-temperatureSlider.addEventListener('mousedown', () => {
-    isDragging = true;
-});
-
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-        const temperatureBar = document.querySelector('.temperature-bar');
-        const barRect = temperatureBar.getBoundingClientRect();
-        
-        // Position des Sliders berechnen (0-100%)
-        let position = (e.clientX - barRect.left) / barRect.width;
-        position = Math.max(0, Math.min(position, 1)); // Auf 0-1 begrenzen
-        
-        // Slider positionieren
-        temperatureSlider.style.left = `${position * 100}%`;
-        
-        // FGL-Element transformieren basierend auf der Temperatur
-        // Bei höherer Temperatur (rechts) zieht sich das Element zusammen
-        const scaleValue = 1 - (position * 0.3); // Scale von 1.0 bis 0.7
-        fglElement.style.transform = `scaleX(${scaleValue})`;
-    }
-});
-
-// Touch-Unterstützung für den Slider
-temperatureSlider.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    e.preventDefault();
-});
-
-document.addEventListener('touchend', () => {
-    isDragging = false;
-});
-
-document.addEventListener('touchmove', (e) => {
-    if (isDragging && e.touches.length > 0) {
-        const temperatureBar = document.querySelector('.temperature-bar');
-        const barRect = temperatureBar.getBoundingClientRect();
-        
-        // Position des Sliders berechnen (0-100%)
-        let position = (e.touches[0].clientX - barRect.left) / barRect.width;
-        position = Math.max(0, Math.min(position, 1)); // Auf 0-1 begrenzen
-        
-        // Slider positionieren
-        temperatureSlider.style.left = `${position * 100}%`;
-        
-        // FGL-Element transformieren basierend auf der Temperatur
-        const scaleValue = 1 - (position * 0.3); // Scale von 1.0 bis 0.7
-        fglElement.style.transform = `scaleX(${scaleValue})`;
-    }
-});
-
-// Konfigurator Funktionen
-const configuratorSteps = document.querySelectorAll('.step');
-const configuratorContents = document.querySelectorAll('.configurator-content');
-const prevButton = document.querySelector('.config-button.prev');
-const nextButton = document.querySelector('.config-button.next');
-
-let currentStep = 0;
-
-// Konfigurator-Optionen
-const options = document.querySelectorAll('.option');
-options.forEach(option => {
-    option.addEventListener('click', function() {
-        // Ausgewählte Option in der aktuellen Gruppe markieren
-        const siblings = this.parentElement.querySelectorAll('.option');
-        siblings.forEach(sib => sib.classList.remove('selected'));
-        this.classList.add('selected');
-    });
-});
-
-// Nächster Schritt im Konfigurator
-nextButton.addEventListener('click', () => {
-    if (currentStep < configuratorSteps.length - 1) {
-        // Aktuellen Schritt deaktivieren
-        configuratorSteps[currentStep].classList.remove('active');
-        configuratorContents[currentStep].classList.remove('active');
-        
-        // Nächsten Schritt aktivieren
-        currentStep++;
-        configuratorSteps[currentStep].classList.add('active');
-        
-        // Wenn wir mehr als den ersten Schritt haben, zeigen wir den Inhalt an
-        if (currentStep < configuratorContents.length) {
-            configuratorContents[currentStep].classList.add('active');
-        } else {
-            // Wenn wir am letzten Schritt sind, zeigen wir die Übersicht an
-            createSummary();
-        }
-        
-        // Button-Status aktualisieren
-        prevButton.disabled = false;
-        if (currentStep === configuratorSteps.length - 1) {
-            nextButton.textContent = 'Anfrage senden';
-        }
-    } else {
-        // Letzter Schritt: Anfrage senden
-        alert('Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.');
-        resetConfigurator();
-    }
-});
-
-// Vorheriger Schritt im Konfigurator
-prevButton.addEventListener('click', () => {
-    if (currentStep > 0) {
-        // Aktuellen Schritt deaktivieren
-        configuratorSteps[currentStep].classList.remove('active');
-        if (currentStep < configuratorContents.length) {
-            configuratorContents[currentStep].classList.remove('active');
-        }
-        
-        // Vorherigen Schritt aktivieren
-        currentStep--;
-        configuratorSteps[currentStep].classList.add('active');
-        configuratorContents[currentStep].classList.add('active');
-        
-        // Button-Status aktualisieren
-        nextButton.textContent = 'Weiter';
-        if (currentStep === 0) {
-            prevButton.disabled = true;
-        }
-    }
-});
-
-// Konfigurator zurücksetzen
-function resetConfigurator() {
-    // Alle Schritte deaktivieren außer dem ersten
-    configuratorSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
-    });
-    
-    // Alle Inhalte deaktivieren außer dem ersten
-    configuratorContents.forEach((content, index) => {
-        if (index === 0) {
-            content.classList.add('active');
-        } else {
-            content.classList.remove('active');
-        }
-    });
-    
-    // Button-Status zurücksetzen
-    currentStep = 0;
-    prevButton.disabled = true;
-    nextButton.textContent = 'Weiter';
-    
-    // Ausgewählte Optionen zurücksetzen (Standard-Auswahl beibehalten)
-    document.querySelectorAll('.options').forEach(optionGroup => {
-        const options = optionGroup.querySelectorAll('.option');
-        // Bei jeder Optionsgruppe nur eine Option ausgewählt lassen
-        let hasSelected = false;
-        options.forEach(option => {
-            if (option.classList.contains('selected') && !hasSelected) {
-                hasSelected = true;
-            } else {
-                option.classList.remove('selected');
-            }
-        });
-        
-        // Falls keine Option ausgewählt ist, die erste auswählen
-        if (!hasSelected && options.length > 0) {
-            options[0].classList.add('selected');
-        }
-    });
-}
-
-// Zusammenfassung erstellen für den letzten Schritt
-function createSummary() {
-    // Neues Inhalts-Element für die Zusammenfassung erstellen
-    const summaryElement = document.createElement('div');
-    summaryElement.classList.add('configurator-content', 'active');
-    summaryElement.id = 'summary';
-    
-    // Überschrift hinzufügen
-    const heading = document.createElement('h3');
-    heading.textContent = 'Ihre Konfiguration';
-    summaryElement.appendChild(heading);
-    
-    // Gewählte Optionen sammeln
-    const selectedOptions = [];
-    document.querySelectorAll('.option.selected').forEach(option => {
-        const stepTitle = option.closest('.configurator-content').previousElementSibling.querySelector('.step-title').textContent;
-        selectedOptions.push({
-            step: stepTitle,
-            value: option.textContent
-        });
-    });
-    
-    // Zusammenfassung als Liste erstellen
-    const summaryList = document.createElement('ul');
-    summaryList.style.listStyleType = 'none';
-    summaryList.style.padding = '1rem';
-    summaryList.style.backgroundColor = 'var(--gray-white)';
-    summaryList.style.borderRadius = '4px';
-    summaryList.style.marginBottom = '2rem';
-    
-    selectedOptions.forEach(option => {
-        const listItem = document.createElement('li');
-        listItem.style.marginBottom = '0.5rem';
-        listItem.style.padding = '0.5rem';
-        listItem.style.borderBottom = '1px solid var(--gray-lightest)';
-        
-        const stepSpan = document.createElement('span');
-        stepSpan.textContent = option.step + ': ';
-        stepSpan.style.fontWeight = 'bold';
-        
-        const valueSpan = document.createElement('span');
-        valueSpan.textContent = option.value;
-        
-        listItem.appendChild(stepSpan);
-        listItem.appendChild(valueSpan);
-        summaryList.appendChild(listItem);
-    });
-    
-    summaryElement.appendChild(summaryList);
-    
-    // Kontaktformular für die Anfrage hinzufügen
-    const contactForm = document.createElement('div');
-    
-    const nameField = createFormField('Ihr Name', 'text', 'summary-name');
-    const emailField = createFormField('Ihre E-Mail-Adresse', 'email', 'summary-email');
-    const phoneField = createFormField('Ihre Telefonnummer (optional)', 'tel', 'summary-phone');
-    const messageField = createFormField('Ihre Nachricht (optional)', 'textarea', 'summary-message');
-    
-    contactForm.appendChild(nameField);
-    contactForm.appendChild(emailField);
-    contactForm.appendChild(phoneField);
-    contactForm.appendChild(messageField);
-    
-    summaryElement.appendChild(contactForm);
-    
-    // Hinweis für Datenschutz
-    const privacyNote = document.createElement('p');
-    privacyNote.style.fontSize = '14px';
-    privacyNote.style.marginTop = '1rem';
-    privacyNote.style.color = 'var(--gray-lighter)';
-    privacyNote.textContent = 'Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.';
-    
-    summaryElement.appendChild(privacyNote);
-    
-    // Alte Zusammenfassung entfernen, falls vorhanden
-    const oldSummary = document.getElementById('summary');
-    if (oldSummary) {
-        oldSummary.remove();
-    }
-    
-    // Zusammenfassung an den Konfigurator anhängen
-    document.querySelector('.configurator-navigation').before(summaryElement);
-}
-
-// Hilfsfunktion zum Erstellen von Formularfeldern
-function createFormField(label, type, id) {
-    const formGroup = document.createElement('div');
-    formGroup.classList.add('form-group');
-    
-    const labelElement = document.createElement('label');
-    labelElement.setAttribute('for', id);
-    labelElement.textContent = label;
-    
-    let inputElement;
-    if (type === 'textarea') {
-        inputElement = document.createElement('textarea');
-        inputElement.rows = 4;
-    } else {
-        inputElement = document.createElement('input');
-        inputElement.type = type;
-    }
-    
-    inputElement.classList.add('form-control');
-    inputElement.id = id;
-    
-    formGroup.appendChild(labelElement);
-    formGroup.appendChild(inputElement);
-    
-    return formGroup;
-}
-
-// Formular-Validierung für die individuellen Konfigurationen
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('contact-name').value;
-    const email = document.getElementById('contact-email').value;
-    
-    if (!name || !email) {
-        alert('Bitte füllen Sie alle Pflichtfelder aus.');
-        return;
-    }
-    
-    alert('Vielen Dank für Ihre individuelle Anfrage! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.');
-    this.reset();
-});
-
-// Fade-in Animation für Elemente beim Scrollen
-const fadeElements = document.querySelectorAll('.card, .flex-container, .configurator');
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-fadeElements.forEach(element => {
-    observer.observe(element);
-});
-
-// Funktionen für zusätzliche Konfigurator-Schritte erstellen
-// Diese würden für die Grundlänge, Elektrischer Anschluss und Mechanische Einbauvariante implementiert werden
-// Da sie im bereitgestellten HTML-Code nicht vollständig enthalten sind, erstellen wir Platzhalter-Funktionen
-
-// Erstelle Schritt 2: Grundlänge
-function createStep2() {
-    const step2 = document.createElement('div');
-    step2.classList.add('configurator-content');
-    step2.id = 'step-2';
-    
-    const optionGroup = document.createElement('div');
-    optionGroup.classList.add('option-group');
-    
-    const heading = document.createElement('h3');
-    heading.textContent = 'Wählen Sie die gewünschte Grundlänge';
-    
-    const options = document.createElement('div');
-    options.classList.add('options');
-    
-    const lengths = ['50 mm', '75 mm', '100 mm', '125 mm', '150 mm', '200 mm'];
-    
-    lengths.forEach(length => {
-        const option = document.createElement('div');
-        option.classList.add('option');
-        if (length === '100 mm') {
-            option.classList.add('selected');
-        }
-        option.textContent = length;
-        option.addEventListener('click', function() {
-            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
-            this.classList.add('selected');
-        });
-        options.appendChild(option);
-    });
-    
-    optionGroup.appendChild(heading);
-    optionGroup.appendChild(options);
-    step2.appendChild(optionGroup);
-    
-    return step2;
-}
-
-// Erstelle Schritt 3: Elektrischer Anschluss
-function createStep3() {
-    const step3 = document.createElement('div');
-    step3.classList.add('configurator-content');
-    step3.id = 'step-3';
-    
-    const optionGroup = document.createElement('div');
-    optionGroup.classList.add('option-group');
-    
-    const heading = document.createElement('h3');
-    heading.textContent = 'Wählen Sie den elektrischen Anschluss';
-    
-    const options = document.createElement('div');
-    options.classList.add('options');
-    
-    const connections = ['Standard-Steckverbinder', 'Kabelanschluss', 'Spezialadapter'];
-    
-    connections.forEach(connection => {
-        const option = document.createElement('div');
-        option.classList.add('option');
-        if (connection === 'Standard-Steckverbinder') {
-            option.classList.add('selected');
-        }
-        option.textContent = connection;
-        option.addEventListener('click', function() {
-            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
-            this.classList.add('selected');
-        });
-        options.appendChild(option);
-    });
-    
-    optionGroup.appendChild(heading);
-    optionGroup.appendChild(options);
-    step3.appendChild(optionGroup);
-    
-    return step3;
-}
-
-// Erstelle Schritt 4: Mechanische Einbauvariante
-function createStep4() {
-    const step4 = document.createElement('div');
-    step4.classList.add('configurator-content');
-    step4.id = 'step-4';
-    
-    const optionGroup = document.createElement('div');
-    optionGroup.classList.add('option-group');
-    
-    const heading = document.createElement('h3');
-    heading.textContent = 'Wählen Sie die mechanische Einbauvariante';
-    
-    const options = document.createElement('div');
-    options.classList.add('options');
-    
-    const variants = ['Standardflansch', 'Spezialhalterung', 'Universal-Befestigung', 'Kundenspezifische Lösung'];
-    
-    variants.forEach(variant => {
-        const option = document.createElement('div');
-        option.classList.add('option');
-        if (variant === 'Standardflansch') {
-            option.classList.add('selected');
-        }
-        option.textContent = variant;
-        option.addEventListener('click', function() {
-            options.querySelectorAll('.option').forEach(op => op.classList.remove('selected'));
-            this.classList.add('selected');
-        });
-        options.appendChild(option);
-    });
-    
-    optionGroup.appendChild(heading);
-    optionGroup.appendChild(options);
-    step4.appendChild(optionGroup);
-    
-    return step4;
-}
-
-// Zusätzliche Schritte zur Konfiguration hinzufügen
-function addConfiguratorSteps() {
-    const step2 = createStep2();
-    const step3 = createStep3();
-    const step4 = createStep4();
-    
-    const configurator = document.querySelector('.configurator');
-    const configNav = document.querySelector('.configurator-navigation');
-    
-    configurator.insertBefore(step2, configNav);
-    configurator.insertBefore(step3, configNav);
-    configurator.insertBefore(step4, configNav);
-}
-
-// Initialisierung
-document.addEventListener('DOMContentLoaded', function() {
-    // Zusätzliche Schritte zum Konfigurator hinzufügen
-    addConfiguratorSteps();
-    
-    // Animations-Funktionalität initialisieren
-    const fglElement = document.getElementById('fgl-element');
-    if (fglElement) {
-        setInterval(() => {
-            // Automatische Animation, wenn der Benutzer nicht interagiert
-            if (!isDragging) {
-                const currentScale = parseFloat(fglElement.style.transform.replace('scaleX(', '').replace(')', '')) || 1;
-                const date = new Date();
-                const seconds = date.getSeconds() + date.getMilliseconds() / 1000;
-                // Sanfte Atmungsanimation
-                const newScale = 0.85 + Math.sin(seconds * 0.5) * 0.15;
-                fglElement.style.transform = `scaleX(${newScale})`;
+                <p>Das Powerbündel bietet vielseitige Einsatzmöglichkeiten in unterschiedlichen Branchen und technischen Bereichen.</p>
                 
-                // Slider entsprechend positionieren
-                const sliderPos = (1 - newScale) / 0.3;
-                temperatureSlider.style.left = `${sliderPos * 100}%`;
-            }
-        }, 50);
-    }
-});
+                <div class="flex-container">
+                    <div class="flex-item card">
+                        <h3>Automation</h3>
+                        <p>In der industriellen Automation ermöglicht das Powerbündel präzise Bewegungen und hohe Kraftentwicklung auf kleinstem Raum.</p>
+                        <ul>
+                            <li>Ventilsteuerungen</li>
+                            <li>Greifer und Positionierer</li>
+                            <li>Kraftgeregelte Aktuatoren</li>
+                        </ul>
+                    </div>
+                    <div class="flex-item card">
+                        <h3>Fahrzeugtechnik</h3>
+                        <p>Im Fahrzeugbau bietet das Powerbündel kompakte Lösungen für präzise Stellbewegungen.</p>
+                        <ul>
+                            <li>Schließsysteme</li>
+                            <li>Getriebeschaltungen</li>
+                            <li>Kupplungsaktuatoren</li>
+                        </ul>
+                    </div>
+                    <div class="flex-item card">
+                        <h3>Medizintechnik</h3>
+                        <p>Präzise Dosierungen und geräuschfreie Betätigung machen das Powerbündel ideal für medizinische Anwendungen.</p>
+                        <ul>
+                            <li>Dosiervorrichtungen</li>
+                            <li>Steuerung von Prothesen</li>
+                            <li>Chirurgische Instrumente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Fachwissen-Bereich -->
+        <section id="fachwissen">
+            <div class="container">
+                <h2>Fachwissen</h2>
+                <p>Vertiefen Sie Ihr Wissen über Formgedächtnislegierungen und ihre Anwendungsmöglichkeiten.</p>
+                
+                <div class="download-card">
+                    <h3>Whitepaper: Formgedächtnislegierungen in der Antriebstechnik</h3>
+                    <p>Unser umfassendes Whitepaper gibt Ihnen einen tiefen Einblick in die Technologie und Anwendungsmöglichkeiten von Formgedächtnislegierungen in modernen Antriebslösungen.</p>
+                    <a href="#" class="download-button">Whitepaper herunterladen</a>
+                </div>
+                
+                <h3>Glossar</h3>
+                <div class="glossary-items">
+                    <div class="card">
+                        <h4>Formgedächtnislegierung (FGL)</h4>
+                        <p>Metallische Legierung, die nach einer scheinbar plastischen Verformung durch Temperaturänderung in ihre ursprüngliche Form zurückkehrt.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Austenitische Phase</h4>
+                        <p>Hochtemperaturphase der FGL mit kubischer Kristallstruktur.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Martensitische Phase</h4>
+                        <p>Niedrigtemperaturphase der FGL mit monokliner Kristallstruktur.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Umwandlungstemperatur</h4>
+                        <p>Temperatur, bei der die Phasenumwandlung zwischen Austenit und Martensit stattfindet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kontakt-Bereich -->
+        <section id="kontakt" class="bg-light">
+            <div class="container">
+                <h2>Kontakt</h2>
+                <p>Haben Sie Fragen oder benötigen Sie weitere Informationen? Kontaktieren Sie uns!</p>
+                
+                <div class="flex-container">
+                    <div class="flex-item card">
+                        <h3>Vertrieb</h3>
+                        <p>Für Anfragen zu unseren Produkten und Lösungen:</p>
+                        <p>Email: vertrieb@mayr.com<br>
+                        Telefon: +49 (0) 8341 / 804-0</p>
+                    </div>
+                    <div class="flex-item card">
+                        <h3>Technischer Support</h3>
+                        <p>Bei technischen Fragen zu unseren Produkten:</p>
+                        <p>Email: techsupport@mayr.com<br>
+                        Telefon: +49 (0) 8341 / 804-444</p>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>Nachricht senden</h3>
+                    <form>
+                        <div class="flex-container" style="margin: 0;">
+                            <div class="flex-item form-group">
+                                <label for="contact-name-msg">Ihr Name</label>
+                                <input type="text" class="form-control" id="contact-name-msg" required>
+                            </div>
+                            <div class="flex-item form-group">
+                                <label for="contact-email-msg">Ihre E-Mail-Adresse</label>
+                                <input type="email" class="form-control" id="contact-email-msg" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Betreff</label>
+                            <input type="text" class="form-control" id="contact-subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Ihre Nachricht</label>
+                            <textarea class="form-control" id="contact-message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>mayr Antriebstechnik</h3>
+                    <p>Innovative Lösungen für die Antriebstechnik seit 1897.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Schnellzugriff</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Startseite</a></li>
+                        <li><a href="#powerbundel">Powerbündel</a></li>
+                        <li><a href="#konfigurator">Konfigurator</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 mayr Antriebstechnik. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="fgl-animation.js"></script>
+    <script src="configurator.js"></script>
+</body>
+</html>
