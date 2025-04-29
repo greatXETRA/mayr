@@ -3,394 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mayr TEST Powerbündel - Innovative Antriebstechnik mit Formgedächtnislegierung</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>mayr Powerbündel Konfigurator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mayr-blue': '#0093d7',
+                        'mayr-blue-light': '#4db8e8',
+                        'mayr-blue-dark': '#006fa3',
+                        'mayr-green': '#a1bf36',
+                        'mayr-green-light': '#c5d77e',
+                        'mayr-green-dark': '#7d992b',
+                        'gray-1': '#1d1d1d',
+                        'gray-2': '#404040',
+                        'gray-3': '#4a4c4d',
+                        'gray-4': '#888b8c',
+                        'gray-5': '#d2d7d9',
+                        'gray-6': '#ebf0f2',
+                    },
+                    fontFamily: {
+                        'helvetica': ['Helvetica Now Display', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Now+Display:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Helvetica Now Display', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* Gestalt Principle: Closure */
+        .logo-circle {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Gestalt Principle: Common Region */
+        .card {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Gestalt Principle: Continuation */
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #0093d7;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2rem !important;
+            }
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
 </head>
-<body>
-    <!-- Header mit Navigation -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo-container">
-                <img src="/api/placeholder/150/50" alt="mayr Logo" class="logo">
-            </a>
-            <button class="mobile-nav-toggle" aria-label="Navigation öffnen/schließen">
-                ☰
-            </button>
-            <nav>
-                <ul id="main-nav">
-                    <li><a href="#home">Startseite</a></li>
-                    <li><a href="#powerbundel">Powerbündel</a></li>
-                    <li><a href="#fgl">Formgedächtnislegierung</a></li>
-                    <li><a href="#konfigurator">Konfigurator</a></li>
-                    <li><a href="#anwendungen">Anwendungen</a></li>
-                    <li><a href="#fachwissen">Fachwissen</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
-                </ul>
-            </nav>
+<body class="bg-gray-6 text-gray-1">
+    <!-- Fixed Navigation - Gestalt Principle: Common Fate -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo - Gestalt Principle: Symmetry -->
+                <div class="flex items-center space-x-2">
+                    <div class="logo-circle bg-mayr-blue text-white">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="text-xl font-bold text-mayr-blue">mayr Powerbündel</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Startseite</a>
+                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">FGL</a>
+                    <a href="#pb" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Powerbündel</a>
+                    <a href="#configurator" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Konfigurator</a>
+                    <a href="#contact" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Kontakt</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-2 hover:text-mayr-blue focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Startseite</a>
+                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">FGL</a>
+                    <a href="#pb" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Powerbündel</a>
+                    <a href="#configurator" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Konfigurator</a>
+                    <a href="#contact" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Kontakt</a>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Hauptinhalt -->
-    <main>
-        <!-- Hero-Bereich -->
-        <section id="home" class="hero">
-            <div class="container hero-content">
-                <h1>mayr Powerbündel</h1>
-                <p>Innovative Antriebstechnik mit Formgedächtnislegierung für präzise Kraft und hohe Zuverlässigkeit</p>
-                <a href="#konfigurator" class="cta-button">Jetzt konfigurieren</a>
-            </div>
-        </section>
-
-        <!-- Powerbündel-Bereich -->
-        <section id="powerbundel">
-            <div class="container">
-                <h2>Das Powerbündel</h2>
-                <div class="flex-container">
-                    <div class="flex-item">
-                        <h3>Funktionsweise</h3>
-                        <p>Das Powerbündel nutzt die einzigartigen Eigenschaften einer Formgedächtnislegierung, um präzise Kraftentwicklung zu ermöglichen. Durch Erwärmung der Legierung entsteht eine Kontraktion, die in mechanische Kraft umgewandelt wird. Dies ermöglicht ein kompaktes Design bei maximaler Leistung.</p>
-                        
-                        <h3>Aufbau</h3>
-                        <div class="flex-container">
-                            <div class="flex-item">
-                                <img src="/api/placeholder/400/300" alt="Aufbau des Powerbündels" style="width: 100%; border-radius: 8px;">
-                            </div>
-                            <div class="flex-item">
-                                <p>Das Powerbündel besteht aus mehreren FGL-Drähten, einer robusten Gehäusestruktur und elektrischen Anschlüssen für präzise Steuerung.</p>
-                            </div>
-                        </div>
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 bg-gradient-to-r from-mayr-blue-light to-mayr-blue-dark text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="hero-text text-4xl md:text-5xl font-bold mb-6">Innovative Antriebslösungen mit Formgedächtnislegierungen</h1>
+                    <p class="text-xl mb-8">Konfigurieren Sie Ihr individuelles Powerbündel für präzise und zuverlässige Spannsysteme.</p>
+                    <div class="flex space-x-4">
+                        <a href="#configurator" class="bg-mayr-green hover:bg-mayr-green-dark text-white font-bold py-3 px-6 rounded-lg transition duration-300">Zum Konfigurator</a>
+                        <a href="#pb" class="bg-white hover:bg-gray-5 text-mayr-blue font-bold py-3 px-6 rounded-lg transition duration-300">Mehr erfahren</a>
                     </div>
-                    <div class="flex-item">
-                        <h3>Eigenschaften</h3>
-                        <ul>
-                            <li>Hohe Kraftdichte bei kompakter Bauweise</li>
-                            <li>Präzise Steuerbarkeit der Kraft</li>
-                            <li>Geräuschlose Betätigung</li>
-                            <li>Hohe Zuverlässigkeit und Langlebigkeit</li>
-                            <li>Energieeffiziente Betriebsweise</li>
-                            <li>Modulare Anpassbarkeit an verschiedene Anwendungen</li>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://placehold.co/600x400/0093d7/ffffff?text=Powerbündel+Visual" alt="Powerbündel Visualisierung" class="rounded-lg shadow-xl max-w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FGL Section - Gestalt Principle: Similarity -->
+    <section id="fgl" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 text-mayr-blue">Formgedächtnislegierungen (FGL)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- One-way effect -->
+                <div class="card bg-gray-6 p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="logo-circle bg-mayr-blue text-white mr-4">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-mayr-blue">Einweg-Effekt</h3>
+                    </div>
+                    <p class="mb-6">Formgedächtnislegierungen kehren nach Verformung und Erwärmung in ihre ursprüngliche Form zurück. Dieser Effekt wird für einmalige Formänderungen genutzt.</p>
+                    
+                    <div class="mb-6">
+                        <img src="https://placehold.co/600x300/d2d7d9/4a4c4d?text=Einweg-Effekt+Visualisierung" alt="Einweg-Effekt" class="rounded-lg w-full">
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-2">Anwendungsbeispiele:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Medizinische Stents für Gefäßerweiterungen</li>
+                            <li>Temperaturgesteuerte Verbindungselemente</li>
                         </ul>
-                        
-                        <h3>Anpassungsmöglichkeiten</h3>
-                        <p>Das Powerbündel kann individuell an Ihre Anforderungen angepasst werden. Die wichtigsten Variablen sind Maximalkraft, Grundlänge, elektrischer Anschluss und mechanische Einbauvariante.</p>
                     </div>
                 </div>
                 
-                <div class="flex-container">
-                    <div class="flex-item card">
-                        <h3>Einbauvarianten</h3>
-                        <p>Das Powerbündel bietet verschiedene elektrische und mechanische Einbaumöglichkeiten für maximale Flexibilität in Ihrer Anwendung:</p>
-                        <div class="flex-container">
-                            <div class="flex-item">
-                                <h4>Elektrische Anschlüsse:</h4>
-                                <ul>
-                                    <li>Standard-Steckverbinder</li>
-                                    <li>Kabelanschluss</li>
-                                    <li>Spezialadapter</li>
-                                </ul>
-                            </div>
-                            <div class="flex-item">
-                                <h4>Mechanische Einbauvarianten:</h4>
-                                <ul>
-                                    <li>Standardflansch</li>
-                                    <li>Spezialhalterung</li>
-                                    <li>Universal-Befestigung</li>
-                                    <li>Kundenspezifische Lösung</li>
-                                </ul>
-                            </div>
+                <!-- Two-way effect -->
+                <div class="card bg-gray-6 p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="logo-circle bg-mayr-green text-white mr-4">
+                            <i class="fas fa-arrows-left-right"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-mayr-green">Zweiweg-Effekt</h3>
+                    </div>
+                    <p class="mb-6">Speziell behandelte FGL können zwischen zwei stabilen Formen wechseln, abhängig von der Temperatur. Dies ermöglicht zyklische Bewegungen ohne externe Kräfte.</p>
+                    
+                    <div class="mb-6">
+                        <img src="https://placehold.co/600x300/d2d7d9/4a4c4d?text=Zweiweg-Effekt+Visualisierung" alt="Zweiweg-Effekt" class="rounded-lg w-full">
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-2">Anwendungsbeispiele:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Aktuatoren für präzise Positionsänderungen</li>
+                            <li>Thermostatventile für automatische Temperaturregelung</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Legierungsbeschreibung -->
+            <div class="mt-16 bg-mayr-blue-light bg-opacity-20 p-8 rounded-lg max-w-3xl mx-auto">
+                <h3 class="text-xl font-bold text-mayr-blue mb-4">Legierungsbeschreibung</h3>
+                <p>Unsere Formgedächtnislegierungen basieren auf Nickel-Titan (NiTi) mit speziellen Zusätzen für optimierte Eigenschaften. Diese intelligenten Materialien "erinnern" sich an ihre ursprüngliche Form und reagieren präzise auf Temperaturänderungen, was sie ideal für innovative Antriebslösungen macht.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Powerbündel Section -->
+    <section id="pb" class="py-20 bg-gray-6">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 text-mayr-blue">Powerbündel (PB)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-mayr-blue mb-4">Funktionsweise</h3>
+                    <p class="mb-6">Das Powerbündel nutzt FGL-Drähte, die sich bei Erwärmung kontrahieren. Durch geschickte Anordnung mehrerer Drähte entsteht eine kompakte, leistungsstarke Antriebseinheit mit hoher Kraftentfaltung auf minimalem Raum.</p>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h4 class="font-bold mb-3 text-mayr-green">Vorteile & Besonderheiten</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Hohe Kraft bei kompakten Abmessungen</li>
+                            <li>Präzise und wiederholgenaue Bewegungen</li>
+                            <li>Wartungsfrei und langlebig</li>
+                            <li>Leise und vibrationsarm</li>
+                            <li>Energieeffizient durch gezielte Erwärmung</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x400/d2d7d9/4a4c4d?text=Powerbündel+Aufbau" alt="Powerbündel Aufbau" class="rounded-lg shadow-xl w-full">
+                    <p class="text-center mt-4 text-gray-3">Abbildung: Aufbau eines Powerbündels mit FGL-Drähten und Spannsystem</p>
+                </div>
+            </div>
+            
+            <!-- Anpassungsmöglichkeiten -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-mayr-blue mb-6">Anpassungsmöglichkeiten</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card bg-white p-6">
+                        <div class="text-mayr-blue text-3xl mb-4">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Grundlängen</h4>
+                        <p>Wählen Sie zwischen verschiedenen Standardlängen oder geben Sie individuelle Maße an.</p>
+                    </div>
+                    <div class="card bg-white p-6">
+                        <div class="text-mayr-blue text-3xl mb-4">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Elektrischer Anschluss</h4>
+                        <p>Verschiedene Spannungen und Anschlusstypen für flexible Integration.</p>
+                    </div>
+                    <div class="card bg-white p-6">
+                        <div class="text-mayr-blue text-3xl mb-4">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Einbauvarianten</h4>
+                        <p>Mechanische Befestigungsoptionen für unterschiedliche Montagesituationen.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anwendungen -->
+            <div>
+                <h3 class="text-2xl font-bold text-mayr-blue mb-6">Anwendungsbeispiele</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card bg-white p-6 flex items-start">
+                        <div class="mr-4 text-mayr-green text-2xl">
+                            <i class="fas fa-grip"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Greifersysteme</h4>
+                            <p>Präzises Greifen und Halten von Werkstücken in automatisierten Fertigungsprozessen.</p>
+                        </div>
+                    </div>
+                    <div class="card bg-white p-6 flex items-start">
+                        <div class="mr-4 text-mayr-green text-2xl">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Spannsysteme</h4>
+                            <p>Schnelles und kraftvolles Spannen von Bauteilen ohne zusätzliche Hydraulik.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Formgedächtnislegierung-Bereich -->
-        <section id="fgl" class="bg-light">
-            <div class="container">
-                <h2>Formgedächtnislegierung (FGL)</h2>
-                <p>Formgedächtnislegierungen sind metallische Werkstoffe, die nach einer scheinbar plastischen Verformung durch Temperaturänderung in ihre ursprüngliche Form zurückkehren können. Diese besonderen Eigenschaften werden im Powerbündel optimal genutzt.</p>
-                
-                <div class="flex-container">
-                    <div class="flex-item card">
-                        <h3>Einweg-Effekt</h3>
-                        <p>Beim Einweg-Effekt kehrt das Material nach einer Verformung durch Erwärmung in seine ursprüngliche Form zurück. Nach Abkühlung bleibt es in dieser Form, bis es erneut mechanisch verformt wird.</p>
-                        <img src="/api/placeholder/400/200" alt="FGL Einweg-Effekt Darstellung" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
-                        <h4>Anwendungsbeispiele:</h4>
-                        <ul>
-                            <li>Thermische Sicherungen</li>
-                            <li>Selbstexpandierende Stents</li>
+    <!-- Spannsystem Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold text-mayr-blue mb-6">Spannsystem</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="mb-6">Das Spannsystem nutzt die Kontraktion der FGL-Drähte beim Erwärmen, um eine präzise Spannkraft zu erzeugen. Beim Abkühlen bleibt die Position durch mechanische Verriegelung erhalten, was energieeffizientes Arbeiten ermöglicht.</p>
+                        <div class="bg-gray-6 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2 text-mayr-green">Funktionsprinzip</h4>
+                            <ol class="list-decimal pl-5 space-y-2">
+                                <li>Elektrische Erwärmung der FGL-Drähte</li>
+                                <li>Kontraktion erzeugt Spannkraft</li>
+                                <li>Mechanische Verriegelung hält Position</li>
+                                <li>Abkühlung bei deaktivierter Spannung</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/600x400/d2d7d9/4a4c4d?text=Spannsystem+Visualisierung" alt="Spannsystem Visualisierung" class="rounded-lg shadow-xl w-full">
+                        <p class="text-center mt-4 text-gray-3">Visualisierung des Spannprinzips mit FGL-Antrieb</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konfigurator Section - Gestalt Principle: Proximity -->
+    <section id="configurator" class="py-20 bg-mayr-blue-light bg-opacity-10">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 text-mayr-blue">Powerbündel Konfigurator</h2>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="grid md:grid-cols-3">
+                    <!-- Navigation Steps -->
+                    <div class="bg-gray-5 p-6">
+                        <h3 class="font-bold text-lg mb-6 text-mayr-blue">Konfigurationsschritte</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <button class="step-btn w-full text-left px-4 py-2 rounded font-medium bg-mayr-blue text-white" data-step="1">
+                                    <span class="mr-2">1</span> Grundparameter
+                                </button>
+                            </li>
+                            <li>
+                                <button class="step-btn w-full text-left px-4 py-2 rounded font-medium text-gray-2" data-step="2">
+                                    <span class="mr-2">2</span> Elektrischer Anschluss
+                                </button>
+                            </li>
+                            <li>
+                                <button class="step-btn w-full text-left px-4 py-2 rounded font-medium text-gray-2" data-step="3">
+                                    <span class="mr-2">3</span> Mechanische Variante
+                                </button>
+                            </li>
+                            <li>
+                                <button class="step-btn w-full text-left px-4 py-2 rounded font-medium text-gray-2" data-step="4">
+                                    <span class="mr-2">4</span> Anwendung
+                                </button>
+                            </li>
                         </ul>
                     </div>
-                    <div class="flex-item card">
-                        <h3>Zweiweg-Effekt</h3>
-                        <p>Beim Zweiweg-Effekt wechselt das Material zwischen zwei definierten Formen, abhängig von der Temperatur. Bei Erwärmung nimmt es eine Form an, bei Abkühlung kehrt es in die zweite Form zurück.</p>
-                        <div class="fgl-animation">
-                            <div class="animation-element" id="fgl-element"></div>
-                            <div class="temperature-indicator">
-                                <span>Kalt</span>
-                                <div class="temperature-bar">
-                                    <div class="temperature-slider" id="temp-slider"></div>
+                    
+                    <!-- Configuration Form -->
+                    <div class="md:col-span-2 p-8">
+                        <!-- Step 1: Basic Parameters -->
+                        <div class="step-content" id="step-1">
+                            <h3 class="text-xl font-bold mb-6 text-mayr-blue">Grundparameter</h3>
+                            
+                            <div class="mb-8">
+                                <label class="block text-gray-2 font-medium mb-2">Maximalkraft (N)</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="500">500 N</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="750">750 N</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="1000">1000 N</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="1500">1500 N</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="2000">2000 N</button>
                                 </div>
-                                <span>Warm</span>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <label class="block text-gray-2 font-medium mb-2">Grundlänge (mm)</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="50">50 mm</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="75">75 mm</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="100">100 mm</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="125">125 mm</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="150">150 mm</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end">
+                                <button class="next-btn bg-mayr-blue hover:bg-mayr-blue-dark text-white font-bold py-2 px-6 rounded transition duration-300">Weiter</button>
                             </div>
                         </div>
-                        <h4>Anwendungsbeispiele:</h4>
-                        <ul>
-                            <li>Aktoren in Robotik</li>
-                            <li>Temperaturgesteuerte Ventile</li>
-                        </ul>
+                        
+                        <!-- Step 2: Electrical Connection -->
+                        <div class="step-content hidden" id="step-2">
+                            <h3 class="text-xl font-bold mb-6 text-mayr-blue">Elektrischer Anschluss</h3>
+                            
+                            <div class="mb-8">
+                                <label class="block text-gray-2 font-medium mb-2">Spannung</label>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="24V">24 V DC</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="48V">48 V DC</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="230V">230 V AC</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <label class="block text-gray-2 font-medium mb-2">Anschlusstyp</label>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="M12">M12 Stecker</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="Klemme">Klemmenanschluss</button>
+                                    <button class="option-btn border border-gray-4 py-3 px-4 rounded hover:border-mayr-blue hover:bg-gray-6" data-value="Kabel">Festangeschlossenes Kabel</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button class="prev-btn bg-gray-5 hover:bg-gray-4 text-gray-2 font-bold py-2 px-6 rounded transition duration-300">Zurück</button>
+                                <button class="next-btn bg-mayr-blue hover:bg-mayr-blue-dark text-white font-bold py-2 px-6 rounded transition duration-300">Weiter</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Mechanical Variant -->
+                        <div class="step-content hidden" id="step-3">
+                            <h3 class="text-xl font-bold mb-6 text-mayr-blue">Mechanische Einbauvariante</h3>
+                            
+                            <div class="mb-8">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="card border border-gray-4 p-4 rounded-lg hover:border-mayr-blue">
+                                        <div class="flex items-start">
+                                            <input type="radio" name="mechanical" id="flansch" class="mt-1 mr-3" value="Flansch">
+                                            <div>
+                                                <label for="flansch" class="font-medium block mb-2">Flanschmontage</label>
+                                                <p class="text-sm text-gray-3">Standardbefestigung mit 4 Bohrungen für einfache Integration.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card border border-gray-4 p-4 rounded-lg hover:border-mayr-blue">
+                                        <div class="flex items-start">
+                                            <input type="radio" name="mechanical" id="gewinde" class="mt-1 mr-3" value="Gewinde">
+                                            <div>
+                                                <label for="gewinde" class="font-medium block mb-2">Gewindeeinbau</label>
+                                                <p class="text-sm text-gray-3">Außengewinde für direkte Verschraubung in entsprechende Aufnahmen.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card border border-gray-4 p-4 rounded-lg hover:border-mayr-blue">
+                                        <div class="flex items-start">
+                                            <input type="radio" name="mechanical" id="schiene" class="mt-1 mr-3" value="Schiene">
+                                            <div>
+                                                <label for="schiene" class="font-medium block mb-2">Schienenbefestigung</label>
+                                                <p class="text-sm text-gray-3">Kompatibel mit Standardprofilen für modulare Systeme.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card border border-gray-4 p-4 rounded-lg hover:border-mayr-blue">
+                                        <div class="flex items-start">
+                                            <input type="radio" name="mechanical" id="individuell" class="mt-1 mr-3" value="Individuell">
+                                            <div>
+                                                <label for="individuell" class="font-medium block mb-2">Individuelle Lösung</label>
+                                                <p class="text-sm text-gray-3">Spezielle Anpassung nach Ihren Anforderungen.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button class="prev-btn bg-gray-5 hover:bg-gray-4 text-gray-2 font-bold py-2 px-6 rounded transition duration-300">Zurück</button>
+                                <button class="next-btn bg-mayr-blue hover:bg-mayr-blue-dark text-white font-bold py-2 px-6 rounded transition duration-300">Weiter</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Application -->
+                        <div class="step-content hidden" id="step-4">
+                            <h3 class="text-xl font-bold mb-6 text-mayr-blue">Anwendungsbeschreibung</h3>
+                            
+                            <div class="mb-6">
+                                <label for="application" class="block text-gray-2 font-medium mb-2">Beschreiben Sie Ihre Anwendung</label>
+                                <textarea id="application" rows="4" class="w-full px-3 py-2 border border-gray-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-mayr-blue focus:border-transparent" placeholder="Bitte beschreiben Sie den Einsatzzweck, Umgebungsbedingungen und besondere Anforderungen..."></textarea>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="special" class="block text-gray-2 font-medium mb-2">Besondere Anforderungen (optional)</label>
+                                <input type="text" id="special" class="w-full px-3 py-2 border border-gray-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-mayr-blue focus:border-transparent" placeholder="Temperaturbereich, Zyklenzahl, etc.">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="contact" class="block text-gray-2 font-medium mb-2">Ihre Kontaktdaten</label>
+                                <input type="email" id="contact" class="w-full px-3 py-2 border border-gray-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-mayr-blue focus:border-transparent" placeholder="E-Mail für Angebotsanfrage" required>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button class="prev-btn bg-gray-5 hover:bg-gray-4 text-gray-2 font-bold py-2 px-6 rounded transition duration-300">Zurück</button>
+                                <button id="submit-config" class="bg-mayr-green hover:bg-mayr-green-dark text-white font-bold py-2 px-6 rounded transition duration-300">Angebot anfordern</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="card" style="margin-top: 2rem;">
-                    <h3>Was ist eine Legierung?</h3>
-                    <p>Eine Legierung ist eine Metallmischung aus mindestens zwei Elementen, wobei mindestens ein Element ein Metall sein muss. Die spezifische Zusammensetzung bestimmt die Eigenschaften der Legierung und macht sie für bestimmte Anwendungen besonders geeignet.</p>
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Konfigurator-Bereich -->
-        <section id="konfigurator">
-            <div class="container">
-                <h2>Powerbündel-Konfigurator</h2>
-                <p>Konfigurieren Sie Ihr individuelles Powerbündel nach Ihren spezifischen Anforderungen. Wählen Sie zwischen dem modularen Konfigurator mit vordefinierten Optionen oder dem individuellen Konfigurator für spezielle Anforderungen.</p>
-                
-                <div class="configurator">
-                    <div class="configurator-steps">
-                        <div class="step active">
-                            <div class="step-number">1</div>
-                            <div class="step-title">Maximalkraft</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-title">Grundlänge</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-title">Elektrischer Anschluss</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <div class="step-title">Mechanische Einbauvariante</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">5</div>
-                            <div class="step-title">Übersicht</div>
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 text-mayr-blue">Häufige Fragen (FAQ)</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <!-- FAQ Item -->
+                    <div class="border-b border-gray-5 pb-4">
+                        <button class="faq-btn flex justify-between items-center w-full text-left">
+                            <h3 class="font-medium text-lg text-gray-2">Wie lange ist die Lebensdauer eines Powerbündels?</h3>
+                            <i class="fas fa-chevron-down text-mayr-blue"></i>
+                        </button>
+                        <div class="faq-content hidden mt-3 text-gray-3">
+                            <p>Die Lebensdauer hängt von den Einsatzbedingungen ab. Unter normalen Betriebsbedingungen erreichen unsere Powerbündel typischerweise mehrere hunderttausend Zyklen. In anspruchsvollen Umgebungen empfehlen wir eine individuelle Beratung.</p>
                         </div>
                     </div>
                     
-                    <div class="configurator-content active" id="step-1">
-                        <div class="option-group">
-                            <h3>Wählen Sie die gewünschte Maximalkraft</h3>
-                            <div class="options">
-                                <div class="option">500 N</div>
-                                <div class="option">1000 N</div>
-                                <div class="option selected">1500 N</div>
-                                <div class="option">2000 N</div>
-                                <div class="option">2500 N</div>
-                                <div class="option">3000 N</div>
-                            </div>
+                    <!-- FAQ Item -->
+                    <div class="border-b border-gray-5 pb-4">
+                        <button class="faq-btn flex justify-between items-center w-full text-left">
+                            <h3 class="font-medium text-lg text-gray-2">Kann ich ein Powerbündel in explosionsgefährdeten Bereichen einsetzen?</h3>
+                            <i class="fas fa-chevron-down text-mayr-blue"></i>
+                        </button>
+                        <div class="faq-content hidden mt-3 text-gray-3">
+                            <p>Standard-Powerbündel sind nicht für Ex-Bereiche zugelassen. Wir bieten jedoch spezielle Ausführungen mit entsprechender Zertifizierung an. Bitte kontaktieren Sie uns für individuelle Lösungen.</p>
                         </div>
                     </div>
                     
-                    <div class="configurator-navigation">
-                        <button class="config-button prev" disabled>Zurück</button>
-                        <button class="config-button next">Weiter</button>
+                    <!-- FAQ Item -->
+                    <div class="border-b border-gray-5 pb-4">
+                        <button class="faq-btn flex justify-between items-center w-full text-left">
+                            <h3 class="font-medium text-lg text-gray-2">Wie schnell reagiert ein Powerbündel?</h3>
+                            <i class="fas fa-chevron-down text-mayr-blue"></i>
+                        </button>
+                        <div class="faq-content hidden mt-3 text-gray-3">
+                            <p>Die Reaktionszeit liegt typischerweise im Bereich von Sekunden, abhängig von der Baugröße und den Umgebungsbedingungen. Für Hochgeschwindigkeitsanwendungen bieten wir optimierte Varianten mit reduzierter Reaktionszeit an.</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div style="margin-top: 3rem;">
-                    <h3>Individueller Konfigurator</h3>
-                    <p>Haben Sie spezielle Anforderungen? Nutzen Sie unseren individuellen Konfigurator für eine maßgeschneiderte Lösung.</p>
                     
-                    <form class="card" style="margin-top: 1rem;">
-                        <div class="form-group">
-                            <label for="application">Beschreibung des Anwendungsbereichs</label>
-                            <textarea class="form-control" id="application" rows="4" placeholder="Beschreiben Sie Ihre Anwendung und spezifischen Anforderungen"></textarea>
+                    <!-- FAQ Item -->
+                    <div class="border-b border-gray-5 pb-4">
+                        <button class="faq-btn flex justify-between items-center w-full text-left">
+                            <h3 class="font-medium text-lg text-gray-2">Welche Wartung ist erforderlich?</h3>
+                            <i class="fas fa-chevron-down text-mayr-blue"></i>
+                        </button>
+                        <div class="faq-content hidden mt-3 text-gray-3">
+                            <p>Powerbündel sind grundsätzlich wartungsfrei. Wir empfehlen jedoch regelmäßige Sichtprüfungen und bei intensiver Nutzung gelegentliche Funktionsprüfungen gemäß den Angaben im Datenblatt.</p>
                         </div>
-                        
-                        <div class="flex-container" style="margin: 0;">
-                            <div class="flex-item form-group">
-                                <label for="force">Gewünschte Kraft (N)</label>
-                                <input type="number" class="form-control" id="force" placeholder="z.B. 1500">
-                            </div>
-                            <div class="flex-item form-group">
-                                <label for="length">Gewünschte Länge (mm)</label>
-                                <input type="number" class="form-control" id="length" placeholder="z.B. 100">
-                            </div>
+                    </div>
+                    
+                    <!-- FAQ Item -->
+                    <div class="border-b border-gray-5 pb-4">
+                        <button class="faq-btn flex justify-between items-center w-full text-left">
+                            <h3 class="font-medium text-lg text-gray-2">Kann ich ein Powerbündel selbst installieren?</h3>
+                            <i class="fas fa-chevron-down text-mayr-blue"></i>
+                        </button>
+                        <div class="faq-content hidden mt-3 text-gray-3">
+                            <p>Die Installation ist einfach und mit den mitgelieferten Anleitungen problemlos möglich. Für komplexe Anwendungen oder Sonderlösungen bieten wir gerne Unterstützung durch unsere Techniker an.</p>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="contact-name">Ihr Name</label>
-                            <input type="text" class="form-control" id="contact-name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="contact-email">Ihre E-Mail-Adresse</label>
-                            <input type="email" class="form-control" id="contact-email">
-                        </div>
-                        
-                        <button type="submit" class="cta-button">Angebotsanfrage senden</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Anwendungen-Bereich -->
-        <section id="anwendungen" class="bg-light">
-            <div class="container">
-                <h2>Anwendungsmöglichkeiten</h2>
-                <p>Das Powerbündel bietet vielseitige Einsatzmöglichkeiten in unterschiedlichen Branchen und technischen Bereichen.</p>
+    <!-- Glossary Section -->
+    <section class="py-16 bg-gray-6">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-12 text-mayr-blue">Glossar</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Aktuator</h3>
+                    <p class="text-gray-3">Ein Antriebselement, das elektrische Signale in mechanische Bewegung umwandelt.</p>
+                </div>
                 
-                <div class="flex-container">
-                    <div class="flex-item card">
-                        <h3>Automation</h3>
-                        <p>In der industriellen Automation ermöglicht das Powerbündel präzise Bewegungen und hohe Kraftentwicklung auf kleinstem Raum.</p>
-                        <ul>
-                            <li>Ventilsteuerungen</li>
-                            <li>Greifer und Positionierer</li>
-                            <li>Kraftgeregelte Aktuatoren</li>
-                        </ul>
-                    </div>
-                    <div class="flex-item card">
-                        <h3>Fahrzeugtechnik</h3>
-                        <p>Im Fahrzeugbau bietet das Powerbündel kompakte Lösungen für präzise Stellbewegungen.</p>
-                        <ul>
-                            <li>Schließsysteme</li>
-                            <li>Getriebeschaltungen</li>
-                            <li>Kupplungsaktuatoren</li>
-                        </ul>
-                    </div>
-                    <div class="flex-item card">
-                        <h3>Medizintechnik</h3>
-                        <p>Präzise Dosierungen und geräuschfreie Betätigung machen das Powerbündel ideal für medizinische Anwendungen.</p>
-                        <ul>
-                            <li>Dosiervorrichtungen</li>
-                            <li>Steuerung von Prothesen</li>
-                            <li>Chirurgische Instrumente</li>
-                        </ul>
-                    </div>
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Formgedächtnislegierung (FGL)</h3>
+                    <p class="text-gray-3">Spezielle Metalllegierung, die sich an eine ursprüngliche Form "erinnert" und bei Temperaturänderung in diese zurückkehrt.</p>
+                </div>
+                
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Einweg-Effekt</h3>
+                    <p class="text-gray-3">Die Eigenschaft von FGL, nach Verformung und Erwärmung in die ursprüngliche Form zurückzukehren.</p>
+                </div>
+                
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Zweiweg-Effekt</h3>
+                    <p class="text-gray-3">Die Fähigkeit speziell behandelter FGL, zwischen zwei stabilen Formen zu wechseln.</p>
+                </div>
+                
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Powerbündel</h3>
+                    <p class="text-gray-3">Kompakte Antriebseinheit, die mehrere FGL-Drähte bündelt für höhere Kräfte.</p>
+                </div>
+                
+                <!-- Glossary Item -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-mayr-blue mb-2">Martensit</h3>
+                    <p class="text-gray-3">Die bei niedrigen Temperaturen stabile Kristallstruktur von FGL.</p>
                 </div>
             </div>
-        </section>
-        
-        <!-- Fachwissen-Bereich -->
-        <section id="fachwissen">
-            <div class="container">
-                <h2>Fachwissen</h2>
-                <p>Vertiefen Sie Ihr Wissen über Formgedächtnislegierungen und ihre Anwendungsmöglichkeiten.</p>
-                
-                <div class="download-card">
-                    <h3>Whitepaper: Formgedächtnislegierungen in der Antriebstechnik</h3>
-                    <p>Unser umfassendes Whitepaper gibt Ihnen einen tiefen Einblick in die Technologie und Anwendungsmöglichkeiten von Formgedächtnislegierungen in modernen Antriebslösungen.</p>
-                    <a href="#" class="download-button">Whitepaper herunterladen</a>
-                </div>
-                
-                <h3>Glossar</h3>
-                <div class="glossary-items">
-                    <div class="card">
-                        <h4>Formgedächtnislegierung (FGL)</h4>
-                        <p>Metallische Legierung, die nach einer scheinbar plastischen Verformung durch Temperaturänderung in ihre ursprüngliche Form zurückkehrt.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Austenitische Phase</h4>
-                        <p>Hochtemperaturphase der FGL mit kubischer Kristallstruktur.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Martensitische Phase</h4>
-                        <p>Niedrigtemperaturphase der FGL mit monokliner Kristallstruktur.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Umwandlungstemperatur</h4>
-                        <p>Temperatur, bei der die Phasenumwandlung zwischen Austenit und Martensit stattfindet.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Kontakt-Bereich -->
-        <section id="kontakt" class="bg-light">
-            <div class="container">
-                <h2>Kontakt</h2>
-                <p>Haben Sie Fragen oder benötigen Sie weitere Informationen? Kontaktieren Sie uns!</p>
-                
-                <div class="flex-container">
-                    <div class="flex-item card">
-                        <h3>Vertrieb</h3>
-                        <p>Für Anfragen zu unseren Produkten und Lösungen:</p>
-                        <p>Email: vertrieb@mayr.com<br>
-                        Telefon: +49 (0) 8341 / 804-0</p>
-                    </div>
-                    <div class="flex-item card">
-                        <h3>Technischer Support</h3>
-                        <p>Bei technischen Fragen zu unseren Produkten:</p>
-                        <p>Email: techsupport@mayr.com<br>
-                        Telefon: +49 (0) 8341 / 804-444</p>
-                    </div>
-                </div>
-                
-                <div class="card" style="margin-top: 2rem;">
-                    <h3>Nachricht senden</h3>
-                    <form>
-                        <div class="flex-container" style="margin: 0;">
-                            <div class="flex-item form-group">
-                                <label for="contact-name-msg">Ihr Name</label>
-                                <input type="text" class="form-control" id="contact-name-msg" required>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-mayr-blue text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-center mb-16">Kontakt</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Kontaktinformationen</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="text-2xl mr-4 text-mayr-green-light">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Adresse</h4>
+                                    <p>mayr Antriebstechnik GmbH & Co. KG<br>
+                                    Kunstmühlstraße 8<br>
+                                    87437 Kempten, Deutschland</p>
+                                </div>
                             </div>
-                            <div class="flex-item form-group">
-                                <label for="contact-email-msg">Ihre E-Mail-Adresse</label>
-                                <input type="email" class="form-control" id="contact-email-msg" required>
+                            
+                            <div class="flex items-start">
+                                <div class="text-2xl mr-4 text-mayr-green-light">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Telefon</h4>
+                                    <p>+49 (0)831 5712-0</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-2xl mr-4 text-mayr-green-light">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">E-Mail</h4>
+                                    <p>info@mayr.com</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="contact-subject">Betreff</label>
-                            <input type="text" class="form-control" id="contact-subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-message">Ihre Nachricht</label>
-                            <textarea class="form-control" id="contact-message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Nachricht senden</button>
-                    </form>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Kontaktformular</h3>
+                        
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block mb-1">Name</label>
+                                <input type="text" id="name" class="w-full px-3 py-2 rounded text-gray-1" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block mb-1">E-Mail</label>
+                                <input type="email" id="email" class="w-full px-3 py-2 rounded text-gray-1" required>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block mb-1">Betreff</label>
+                                <input type="text" id="subject" class="w-full px-3 py-2 rounded text-gray-1" required>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block mb-1">Nachricht</label>
+                                <textarea id="message" rows="4" class="w-full px-3 py-2 rounded text-gray-1" required></textarea>
+                            </div>
+                            
+                            <div class="pt-2">
+                                <button type="submit" class="bg-mayr-green hover:bg-mayr-green-dark text-white font-bold py-2 px-6 rounded transition duration-300">Nachricht senden</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>mayr Antriebstechnik</h3>
-                    <p>Innovative Lösungen für die Antriebstechnik seit 1897.</p>
+    <footer class="bg-gray-1 text-gray-5 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="logo-circle bg-mayr-blue text-white mr-3">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">mayr Powerbündel</span>
+                    </div>
+                    <p class="mb-4">Innovative Antriebslösungen mit Formgedächtnislegierungen für präzise und zuverlässige Anwendungen.</p>
+                    <a href="https://www.mayr.com" target="_blank" class="text-mayr-blue-light hover:text-mayr-blue font-medium">Zur mayr Website →</a>
                 </div>
-                <div class="footer-column">
-                    <h3>Schnellzugriff</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Startseite</a></li>
-                        <li><a href="#powerbundel">Powerbündel</a></li>
-                        <li><a href="#konfigurator">Konfigurator</a></li>
-                        <li><a href="#kontakt">Kontakt</a></li>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Produkte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#pb" class="hover:text-mayr-blue-light">Powerbündel</a></li>
+                        <li><a href="#fgl" class="hover:text-mayr-blue-light">Formgedächtnislegierungen</a></li>
+                        <li><a href="#configurator" class="hover:text-mayr-blue-light">Konfigurator</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Rechtliches</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li><a href="#">AGB</a></li>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Informationen</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-mayr-blue-light">FAQ</a></li>
+                        <li><a href="#" class="hover:text-mayr-blue-light">Glossar</a></li>
+                        <li><a href="#" class="hover:text-mayr-blue-light">Technische Dokumente</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Rechtliches</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://www.mayr.com/impressum/" target="_blank" class="hover:text-mayr-blue-light">Impressum</a></li>
+                        <li><a href="https://www.mayr.com/datenschutz/" target="_blank" class="hover:text-mayr-blue-light">Datenschutz</a></li>
+                        <li><a href="https://www.mayr.com/agb/" target="_blank" class="hover:text-mayr-blue-light">AGB</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 mayr Antriebstechnik. Alle Rechte vorbehalten.</p>
+            
+            <div class="pt-8 border-t border-gray-3 flex flex-col md:flex-row justify-between items-center">
+                <p class="mb-4 md:mb-0">© 2023 mayr Antriebstechnik GmbH & Co. KG. Alle Rechte vorbehalten.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-2xl text-gray-5 hover:text-mayr-blue-light"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-2xl text-gray-5 hover:text-mayr-blue-light"><i class="fab fa-xing"></i></a>
+                    <a href="#" class="text-2xl text-gray-5 hover:text-mayr-blue-light"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
-    <script src="fgl-animation.js"></script>
-    <script src="configurator.js"></script>
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-mayr-green rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-mayr-blue mb-4">Vielen Dank!</h3>
+                <p class="mb-6">Ihre Anfrage wurde erfolgreich übermittelt. Unser Team wird sich in Kürze mit Ihnen in Verbindung setzen.</p>
+                <button id="close-modal" class="bg-mayr-blue hover:bg-mayr-blue-dark text-white font-bold py-2 px-6 rounded transition duration-300">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // FAQ Accordion
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+        
+        // Configurator Navigation
+        const stepButtons = document.querySelectorAll('.step-btn');
+        const stepContents = document.querySelectorAll('.step-content');
+        const nextButtons = document.querySelectorAll('.next-btn');
+        const prevButtons = document.querySelectorAll('.prev-btn');
+        const optionButtons = document.querySelectorAll('.option-btn');
+        
+        // Initialize first step as active
+        stepContents[0].classList.remove('hidden');
+        
+        // Step navigation
+        stepButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const step = button.dataset.step;
+                
+                // Update button styles
+                stepButtons.forEach(btn => {
+                    btn.classList.remove('bg-mayr-blue', 'text-white');
+                    btn.classList.add('text-gray-2');
+                });
+                
+                button.classList.remove('text-gray-2');
+                button.classList.add('bg-mayr-blue', 'text-white');
+                
+                // Show selected step content
+                stepContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                document.getElementById(`step-${step}`).classList.remove('hidden');
+            });
+        });
+        
+        // Next button
+        nextButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const currentStep = button.closest('.step-content');
+                const nextStep = currentStep.nextElementSibling;
+                
+                currentStep.classList.add('hidden');
+                nextStep.classList.remove('hidden');
+                
+                // Update step button
+                const currentStepNumber = currentStep.id.split('-')[1];
+                const nextStepNumber = nextStep.id.split('-')[1];
+                
+                stepButtons.forEach(btn => {
+                    btn.classList.remove('bg-mayr-blue', 'text-white');
+                    btn.classList.add('text-gray-2');
+                });
+                
+                document.querySelector(`.step-btn[data-step="${nextStepNumber}"]`).classList.add('bg-mayr-blue', 'text-white');
+            });
+        });
+        
+        // Previous button
+        prevButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const currentStep = button.closest('.step-content');
+                const prevStep = currentStep.previousElementSibling;
+                
+                currentStep.classList.add('hidden');
+                prevStep.classList.remove('hidden');
+                
+                // Update step button
+                const currentStepNumber = currentStep.id.split('-')[1];
+                const prevStepNumber = prevStep.id.split('-')[1];
+                
+                stepButtons.forEach(btn => {
+                    btn.classList.remove('bg-mayr-blue', 'text-white');
+                    btn.classList.add('text-gray-2');
+                });
+                
+                document.querySelector(`.step-btn[data-step="${prevStepNumber}"]`).classList.add('bg-mayr-blue', 'text-white');
+            });
+        });
+        
+        // Option selection
+        optionButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from siblings
+                const parent = button.parentElement;
+                const siblings = parent.querySelectorAll('.option-btn');
+                siblings.forEach(sib => {
+                    sib.classList.remove('border-mayr-blue', 'bg-gray-6');
+                    sib.classList.add('border-gray-4');
+                });
+                
+                // Add active class to clicked button
+                button.classList.remove('border-gray-4');
+                button.classList.add('border-mayr-blue', 'bg-gray-6');
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        const submitConfig = document.getElementById('submit-config');
+        const successModal = document.getElementById('success-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            successModal.classList.remove('hidden');
+        });
+        
+        submitConfig.addEventListener('click', (e) => {
+            e.preventDefault();
+            successModal.classList.remove('hidden');
+        });
+        
+        closeModal.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+        });
+        
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
