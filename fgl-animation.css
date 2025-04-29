@@ -1,0 +1,48 @@
+.fgl-container {
+    margin: 50px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.fgl-element {
+    height: 30px;
+    width: 300px;
+    background-color: hsl(240, 80%, 50%);
+    margin: 20px auto;
+    transition: transform 0.3s, background-color 0.3s;
+    transform-origin: center left;
+}
+
+.temperature-control {
+    position: relative;
+    margin: 40px auto;
+    width: 300px;
+}
+
+.temperature-bar {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(to right, blue, red);
+    border-radius: 3px;
+    position: relative;
+}
+
+.temperature-slider {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 50%;
+    top: -7px;
+    left: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+}
