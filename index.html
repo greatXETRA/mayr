@@ -84,6 +84,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="fgl-animation.css">
 </head>
 <body class="bg-gray-6 text-gray-1">
     <!-- Fixed Navigation - Gestalt Principle: Common Fate -->
@@ -229,10 +230,22 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                    <img src="https://placehold.co/600x400/d2d7d9/4a4c4d?text=Powerbündel+Aufbau" alt="Powerbündel Aufbau" class="rounded-lg shadow-xl w-full">
-                    <p class="text-center mt-4 text-gray-3">Abbildung: Aufbau eines Powerbündels mit FGL-Drähten und Spannsystem</p>
-                </div>
+             <div class="fgl-container">
+        <h2>Demonstration einer Formgedächtnislegierung</h2>
+        
+        <div id="fgl-element" class="fgl-element"></div>
+        
+        <div class="temperature-control">
+            <div class="temperature-bar"></div>
+            <div id="temp-slider" class="temperature-slider"></div>
+            <div class="labels">
+                <span>Kalt</span>
+                <span>Heiß</span>
+            </div>
+        </div>
+        
+        <p>Ziehe den Schieberegler, um die Temperatur zu ändern und beobachte, wie sich die Formgedächtnislegierung zusammenzieht und ihre Farbe ändert.</p>
+    </div>
             </div>
             
             <!-- Anpassungsmöglichkeiten -->
@@ -901,5 +914,6 @@
             }
         });
     </script>
+     <script src="fgl-animation.js"></script>
 </body>
 </html>
