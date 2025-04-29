@@ -13,9 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Normalize position (0 to 1)
         const normalizedPosition = position / barWidth;
         
-        // Calculate FGL contraction (more contraction as temperature increases)
-        // Minimum scale is 0.6 (40% contraction), maximum is 1 (no contraction)
-        const scale = 1 - (normalizedPosition * 0.4);
+        // Calculate FGL contraction
+        // At position 0 (left - "Raumtemperatur"): scale = 1 (fully extended)
+        // At position barWidth (right - "erwärmt"): scale = 0.75 (contracted to 3/4)
+        const scale = 1 - (normalizedPosition * 0.25);
         
         // Update element style
         fglElement.style.transform = `scaleX(${scale})`;
@@ -25,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const hue = 240 - (normalizedPosition * 240); // 240 (blue) to 0 (red)
         fglElement.style.backgroundColor = `hsl(${hue}, 80%, 50%)`;
     }
+    
+    // Set up initial position (left - "Raumtemperatur")
+    tempSlider.style.left = '0px';
+    updateFGLAnimation(0);
     
     // Set up slider dragging
     tempSlider.addEventListener('mousedown', function(e) {
@@ -102,10 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         const tempBar = document.querySelector('.temperature-bar');
         if (tempBar) {
+            const oldBarWidth = barWidth;
             barWidth = tempBar.offsetWidth;
             
             // Recalculate slider position as percentage of new width
-            const percentage = sliderPosition / barWidth;
+            const percentage = sliderPosition / oldBarWidth;
             sliderPosition = percentage * barWidth;
             tempSlider.style.left = sliderPosition + 'px';
             
@@ -113,35 +119,4 @@ document.addEventListener('DOMContentLoaded', function() {
             updateFGLAnimation(sliderPosition);
         }
     });
-    
-    // Automatic demonstration on load
-    let demoDirection = 1; // 1: increasing, -1: decreasing
-    let demoPosition = 0;
-    
-    function runDemo() {
-        // Update demo position
-        demoPosition += 2 * demoDirection;
-        
-        // Check boundaries and reverse direction if needed
-        if (demoPosition >= barWidth) {
-            demoPosition = barWidth;
-            demoDirection = -1;
-        } else if (demoPosition <= 0) {
-            demoPosition = 0;
-            demoDirection = 1;
-        }
-        
-        // Update slider position
-        tempSlider.style.left = demoPosition + 'px';
-        sliderPosition = demoPosition;
-        
-        // Update animation
-        updateFGLAnimation(demoPosition);
-        
-        // Continue demo animation
-        requestAnimationFrame(runDemo);
-    }
-    
-    // Start the demo animation
-    requestAnimationFrame(runDemo);
 });
