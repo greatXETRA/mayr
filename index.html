@@ -230,10 +230,18 @@
                         </ul>
                     </div>
                                                                         <!-- Import the component -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
-<!-- Use it like any other HTML element -->
-<model-viewer alt="Powerbündel" src="assets/models/Pb3d.glb" poster="assets/pb.png" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+
+<model-viewer src="Pb3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+    </div>
 
       </div>
              <div class="fgl-container">
@@ -924,5 +932,6 @@
         });
     </script>
      <script src="fgl-animation.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 </body>
 </html>
