@@ -232,14 +232,26 @@
                                                                         <!-- Import the component -->
 
 
-<model-viewer src="assets/models/Pb3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="agx" shadow-intensity="1" exposure="0.5">
-    <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-    </div>
-    <button slot="ar-button" id="ar-button">
-        View in your space
-    </button>
-</model-viewer>
+<div class="flex justify-center items-center">
+    <model-viewer 
+        src="assets/models/Pb3d.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        tone-mapping="agx" 
+        shadow-intensity="1" 
+        exposure="0.5"
+        style="width: 100%; max-width: 700px; height: 500px;">
+        
+        <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">
+            View in your space
+        </button>
+    </model-viewer>
+</div>
+
 
       </div>
              <div class="fgl-container">
