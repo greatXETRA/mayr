@@ -102,7 +102,7 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Startseite</a>
-                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">FGL</a>
+                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Technologie</a>
                     <a href="#pb" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Powerbündel</a>
                     <a href="#configurator" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Konfigurator</a>
                     <a href="#contact" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Kontakt</a>
@@ -120,7 +120,7 @@
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="flex flex-col space-y-3">
                     <a href="#home" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Startseite</a>
-                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">FGL</a>
+                    <a href="#fgl" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Technologie</a>
                     <a href="#pb" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Powerbündel</a>
                     <a href="#configurator" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Konfigurator</a>
                     <a href="#contact" class="nav-link text-gray-2 hover:text-mayr-blue font-medium">Kontakt</a>
@@ -130,13 +130,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 bg-gradient-to-r from-mayr-blue-light to-mayr-blue-dark text-white">
+   <section id="home" class="pt-24 pb-20 bg-gradient-to-r from-mayr-blue-light to-mayr-blue-dark text-white">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
+        <div class="flex flex-col md:flex-row items-stretch md:min-h-[500px]"> <!-- min-h für visuelle Mitte -->
             <!-- Textblock -->
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
-                <h1 class="hero-text text-4xl md:text-5xl font-bold mb-8"> <!-- mb-8 erhöht den Abstand -->
-                    Innovative Antriebslösungen mit Formgedächtnislegierungen
+            <div class="md:w-1/2 flex flex-col justify-center mb-10 md:mb-0 md:pr-8">
+                <h1 class="hero-text text-4xl md:text-5xl font-bold mb-6">
+                    Innovative Antriebslösungen<br class="hidden md:block"> mit Formgedächtnislegierungen
                 </h1>
                 <p class="text-xl mb-8">
                     Konfigurieren Sie Ihr individuelles Powerbündel für präzise und zuverlässige Spannsysteme.
@@ -148,12 +148,13 @@
             </div>
 
             <!-- Bildblock -->
-            <div class="md:w-1/2 flex justify-center mt-6 md:mt-0">
+            <div class="md:w-1/2 flex justify-center items-center">
                 <img src="assets/pb2.png" alt="Powerbündel Visualisierung" class="rounded-lg shadow-xl max-w-full h-auto">
             </div>
         </div>
     </div>
 </section>
+
 
 
     <!-- FGL Section - Gestalt Principle: Similarity -->
