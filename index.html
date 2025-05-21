@@ -603,6 +603,128 @@
         </div>
     </section>
 
+<section class="events-section">
+        <div class="container mx-auto px-4" x-data="{ 
+            showFilters: false,
+            events: [
+                {
+                    category: 'Smart Infrastructure',
+                    date: '21. Mai 2025',
+                    title: 'Ladeinfrastruktur für Stadtwerke - Eichrecht und Abrechnung',
+                    description: 'Stadtwerke spielen eine Schlüsselrolle bei der Bereitstellung einer leistungsfähigen öffentlichen Schnellladeinfrastruktur für...',
+                    image: 'https://source.unsplash.com/random/800x600/?infrastructure',
+                    type: 'Webinar'
+                },
+                {
+                    category: 'Digital Industries',
+                    date: '22. Mai - 24. Juni 2025',
+                    title: 'DriveTechTalk',
+                    description: 'Entdecken Sie die Zukunft der Antriebstechnik mit unseren diesjährigen Branchenspezialis!',
+                    image: 'https://source.unsplash.com/random/800x600/?technology',
+                    type: 'Webinar'
+                },
+                {
+                    category: 'Digital Industries',
+                    date: '23. Mai - 6. Juni 2025',
+                    title: 'Sustainability for Industry',
+                    description: 'Diese Reihe richtet sich an alle, die sich für eine nachhaltige Transformation ihres Unternehmens engagieren. In jedem Webinar widmen wir uns...',
+                    image: 'https://source.unsplash.com/random/800x600/?sustainability',
+                    type: 'Webinar'
+                },
+                {
+                    category: 'Digital Learning',
+                    date: '26. Mai 2025',
+                    title: 'Lernen im Flow: Wie Sie Weiterbildung mühelos integrieren',
+                    description: 'Lernen neu gedacht: Entdecken Sie im Webinar, wie moderne Methoden Weiterbildung alltagstauglich machen – flexibel, praxisnah und...',
+                    image: 'https://source.unsplash.com/random/800x600/?learning',
+                    type: 'Webinar'
+                }
+            ],
+            activeFilters: ['Webinar'],
+            removeFilter(filter) {
+                this.activeFilters = this.activeFilters.filter(f => f !== filter);
+            },
+            resetFilters() {
+                this.activeFilters = [];
+            },
+            filteredEvents() {
+                if (this.activeFilters.length === 0) return this.events;
+                return this.events.filter(event => 
+                    this.activeFilters.some(filter => 
+                        event.category.includes(filter) || 
+                        event.type.includes(filter)
+                    )
+                );
+            }
+        }">
+            <h1 class="text-3xl font-bold mb-8 text-center">Kommende Messen, Events & Webinare</h1>
+            
+            <!-- Filters Section -->
+            <div class="flex flex-wrap justify-between items-center mb-8">
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <div class="dropdown">
+                        <span>Veranstaltungsart</span>
+                        <svg class="inline-block ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="dropdown">
+                        <span>Themen und Schwerpunkte</span>
+                        <svg class="inline-block ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex">
+                    <input type="text" placeholder="Schnellsuche" class="search-box">
+                    <button class="search-button">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Active Filters -->
+            <div class="mb-8">
+                <template x-if="activeFilters.length > 0">
+                    <div class="flex flex-wrap items-center">
+                        <span class="filter-reset mr-4" x-on:click="resetFilters">Alle Filter löschen</span>
+                        <template x-for="filter in activeFilters" :key="filter">
+                            <span class="filter-tag mb-2">
+                                <span x-text="filter"></span>
+                                <span class="close-icon" x-on:click="removeFilter(filter)">✕</span>
+                            </span>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- Results Count -->
+            <div class="mb-6">
+                <p class="text-xl font-semibold" x-text="`${filteredEvents().length} Ergebnisse`"></p>
+            </div>
+            
+            <!-- Events Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <template x-for="event in filteredEvents()" :key="event.title">
+                    <div class="event-container bg-gray-900 overflow-hidden">
+                        <img :src="event.image" alt="Event" class="event-image">
+                        <div class="p-4">
+                            <div class="text-sm text-mayr-blue-light mb-1" x-text="event.category"></div>
+                            <div class="text-sm mb-2" x-text="event.date"></div>
+                            <h3 class="text-xl font-bold mb-3" x-text="event.title"></h3>
+                            <p class="text-sm text-gray-300 mb-8" x-text="event.description"></p>
+                            <svg class="event-arrow w-6 h-6 text-mayr-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+    
     <!-- Glossary Section -->
     <section class="py-16 bg-gray-6">
         <div class="container mx-auto px-4">
